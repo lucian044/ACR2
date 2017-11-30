@@ -22,7 +22,7 @@ namespace ACR2.Controllers
         [HttpGet("/api/weekentries")]
         public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries()
         {
-            var entries = await context.WeekEntry.Include(w => w.Category).Include(w => w.Week).ToListAsync();
+            var entries = await context.WeekEntry.Include(w => w.Category).ToListAsync();
 
             return mapper.Map<List<WeekEntry>, List<WeekEntryResource>>(entries);
         }
