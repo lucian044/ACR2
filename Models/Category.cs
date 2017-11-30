@@ -7,8 +7,8 @@ namespace ACR2.Models
         public int Id { get; set; }
         [Required]
         [StringLength(255)]
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
         [Required]
-        public int CategoryNumber { get; set; }
+        public int Number { get; set; }
     }
 }
