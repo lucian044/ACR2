@@ -9,22 +9,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ACR2.Controllers
 {
-    public class WeekController: Controller
+    public class WeekNumberController : Controller
     {
         private readonly ACRDbContext context;
         private readonly IMapper mapper;
-        public WeekController(ACRDbContext context, IMapper mapper)
+        public WeekNumberController(ACRDbContext context, IMapper mapper)
         {
             this.mapper = mapper;
             this.context = context;
         }
 
-        [HttpGet("/api/weeks")]
-        public async Task<IEnumerable<WeekResource>> GetWeeks()
+        [HttpGet("/api/weeknumbers")]
+        public async Task<IEnumerable<WeekNumberResource>> GetWeekNumbers()
         {
-            var weeks = await context.Week.Include(w => w.Entries).Include(w => w.WeekNumber).ToListAsync();
+            var numbers = await context.WeekNumber.ToListAsync();
 
-            return mapper.Map<List<Week>, List<WeekResource>>(weeks);
+            return mapper.Map<List<WeekNumber>, List<WeekNumberResource>>(numbers);
         }
     }
 }
