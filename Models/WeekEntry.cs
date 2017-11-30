@@ -17,6 +17,8 @@ namespace ACR2.Models
         public int Thurs { get; set; }
         [Required]
         public int Fri { get; set; }
+        public Week Week { get; set; }
+        public int WeekId { get; set; } 
 
     }
 }
