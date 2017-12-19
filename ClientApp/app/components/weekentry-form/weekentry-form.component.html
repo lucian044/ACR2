@@ -1,0 +1,17 @@
+<h1>New Week</h1>
+<form>
+  <div class="form-group">
+    <label for="weeknumber">Week Number</label>
+    <select id="weeknumber" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let w of weeknumbers" value="{{ w.id }}">{{ w.number }}</option>  
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select id="category" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let c of categories" value="{{ c.id }}">{{ c.name }}</option>  
+    </select>
+  </div>
+</form>

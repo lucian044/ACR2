@@ -5,7 +5,7 @@
   },
   "apps": [
     {
-      "root": "ClientAppcd",
+      "root": "ClientApp",
       "outDir": "dist",
       "assets": [
         "assets",
