@@ -26,5 +26,11 @@ namespace ACR2.Controllers
 
             return mapper.Map<List<WeekEntry>, List<WeekEntryResource>>(entries);
         }
+
+        [HttpPost("/api/weekentries/post")]
+        public IActionResult CreateWeekEntry([FromBody] WeekEntry entry)
+        {
+            return Ok(entry);
+        }
     }
 }
