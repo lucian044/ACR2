@@ -3,15 +3,37 @@
   <div class="form-group">
     <label for="weeknumber">Week Number</label>
     <select id="weeknumber" class="form-control">
-        <option value=""></option>
-        <option *ngFor="let w of weeknumbers" value="{{ w.id }}">{{ w.number }}</option>  
+      <option value=""></option>
+      <option *ngFor="let w of weeknumbers" value="{{ w.id }}">{{ w.number }}</option>
     </select>
   </div>
   <div class="form-group">
     <label for="category">Category</label>
     <select id="category" class="form-control">
-        <option value=""></option>
-        <option *ngFor="let c of categories" value="{{ c.id }}">{{ c.name }}</option>  
+      <option value=""></option>
+      <option *ngFor="let c of categories" value="{{ c.id }}">{{ c.name }}</option>
     </select>
   </div>
+  <h2>Minutes Per Day</h2>
+  <div class="form-group">
+    <label for="">Moday</label>
+    <input id="mon" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Tuesday</label>
+    <input id="tue" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Wednesday</label>
+    <input id="wed" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Thursday</label>
+    <input id="thurs" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="">Friday</label>
+    <input id="fri" type="text" class="form-control">
+  </div>
+  <button class="btn btn-primary">Submit</button>
 </form>
