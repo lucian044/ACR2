@@ -8,7 +8,7 @@ import { WeekEntryService } from '../../services/weekentry.service';
 })
 export class WeekEntryFormComponent implements OnInit {
   categories: any;
-  weeknumbers: any;
+  weeks: any;
 
   constructor(
     private weekEntryService: WeekEntryService) { }
@@ -17,8 +17,8 @@ export class WeekEntryFormComponent implements OnInit {
     this.weekEntryService.getCategories().subscribe(categories => 
       this.categories = categories);
 
-    this.weekEntryService.getWeeks().subscribe(weeknumbers =>
-      this.weeknumbers = weeknumbers);
+    this.weekEntryService.getWeeks().subscribe(weeks =>
+      this.weeks = weeks);
   }
 
 }

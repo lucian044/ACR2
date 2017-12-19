@@ -9,7 +9,8 @@ namespace ACR2.Models
         [Required]
         public int Quarter { get; set; }
         [Required]
-        public WeekNumber WeekNumber { get; set; }
+        public int Number { get; set; }
+        public int Year { get; set; }
         public List<WeekEntry> Entries { get; set; }
     }
 }
