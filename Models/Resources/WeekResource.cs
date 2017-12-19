@@ -6,7 +6,8 @@ namespace ACR2.Models.Resources
     {
         public int Id { get; set; }
         public int Quarter { get; set; }
-        public WeekNumberResource WeekNumber { get; set; }
+        public int Number { get; set; }
+        public int Year { get; set; }
         public List<WeekEntryResource> Entries { get; set; }
     }
 }
