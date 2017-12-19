@@ -12,5 +12,10 @@ namespace ACR2.Models
         public int Number { get; set; }
         public int Year { get; set; }
         public List<WeekEntry> Entries { get; set; }
+
+        public Week()
+        {
+            Entries = new List<WeekEntry>();
+        }
     }
 }

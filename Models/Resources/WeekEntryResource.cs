@@ -9,5 +9,6 @@ namespace ACR2.Models.Resources
         public int Wed { get; set; }
         public int Thurs { get; set; }
         public int Fri { get; set; }
+        public int WeekId { get; set; }
     }
 }
