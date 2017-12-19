@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
-import { WeekNumberService } from '../../services/weeknumber.service';
+import { WeekEntryService } from '../../services/weekentry.service';
 
 @Component({
   selector: 'app-week-form',
@@ -11,18 +10,15 @@ export class WeekEntryFormComponent implements OnInit {
   categories: any;
   weeknumbers: any;
 
-  constructor(private categoryService: CategoryService, private weekService: WeekNumberService) { }
+  constructor(
+    private weekEntryService: WeekEntryService) { }
 
   ngOnInit() {
-    this.categoryService.getCategories().subscribe(categories => {
-      this.categories = categories;
-    console.log("CATEGORIES", this.categories);
-    });
+    this.weekEntryService.getCategories().subscribe(categories => 
+      this.categories = categories);
 
-    this.weekService.getWeeks().subscribe(weeknumbers => {
-      this.weeknumbers = weeknumbers;
-    console.log("WEEKS", this.weeknumbers);
-    });
+    this.weekEntryService.getWeeks().subscribe(weeknumbers =>
+      this.weeknumbers = weeknumbers);
   }
 
 }

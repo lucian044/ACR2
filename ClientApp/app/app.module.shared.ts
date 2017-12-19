@@ -10,8 +10,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { CategoryService } from './services/category.service';
-import { WeekNumberService } from './services/weeknumber.service';
+import { WeekEntryService } from './services/weekentry.service';
 
 @NgModule({
     declarations: [
@@ -36,8 +35,7 @@ import { WeekNumberService } from './services/weeknumber.service';
         ])
     ],
     providers: [
-        CategoryService,
-        WeekNumberService
+        WeekEntryService
     ]
 })
 export class AppModuleShared {
