@@ -6,7 +6,7 @@ namespace ACR2.Models
     {
         public int Id { get; set; }
         [Required]
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         [Required]
         public int Mon { get; set; }
         [Required]
@@ -17,7 +17,7 @@ namespace ACR2.Models
         public int Thurs { get; set; }
         [Required]
         public int Fri { get; set; }
-        public Week Week { get; set; }
+        [Required]
         public int WeekId { get; set; }
     }
 }
