@@ -18,6 +18,7 @@ namespace ACR2.Mapping
 
             //API Resource to Domain
             CreateMap<WeekEntryResource, WeekEntry>()
+                .ForMember(we => we.Id, opt => opt.Ignore())
                 .ForMember(we => we.CategoryId, opt => opt.MapFrom(wer => wer.Category.Id))
                 .ForMember(we => we.WeekId, opt => opt.MapFrom(wer => wer.Week.Id));
 
