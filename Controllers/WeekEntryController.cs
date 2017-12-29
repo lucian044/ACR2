@@ -13,33 +13,46 @@ namespace ACR2.Controllers
     [Route("/api/weekentries")]
     public class WeekEntryController : Controller
     {
-        private readonly ACRDbContext context;
         private readonly IMapper mapper;
-        public WeekEntryController(ACRDbContext context, IMapper mapper)
+        private readonly IWeekEntryRepository entryRepo;
+        private readonly ICategoryRepository categoryRepo;
+        private readonly IWeekRepository weekRepo;
+        private readonly IUnitOfWork uw;
+
+        public WeekEntryController(
+            IMapper mapper, 
+            IWeekEntryRepository entryRepo,
+            ICategoryRepository categoryRepo,
+            IWeekRepository weekRepo,
+            IUnitOfWork uw
+        )
         {
+            this.entryRepo = entryRepo;
+            this.categoryRepo = categoryRepo;
+            this.weekRepo = weekRepo;
+            this.uw = uw;
             this.mapper = mapper;
-            this.context = context;
         }
 
         [HttpGet]
         public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries()
         {
-            var entries = await context.WeekEntry.Include(e => e.Category).Include(e => e.Week).ToListAsync();
+            var entries = await entryRepo.GetAllEntries();
 
-            var result = mapper.Map<List<WeekEntry>, List<WeekEntryResource>>(entries);
+            var result = mapper.Map<IEnumerable<WeekEntry>, IEnumerable<WeekEntryResource>>(entries);
 
             return result;
-                
+
         }
 
         [HttpPost("post")]
         public async Task<IActionResult> CreateWeekEntry([FromBody] WeekEntryResource entryResource)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var category = await context.Category.FindAsync(entryResource.Category.Id);
-            var week = await context.Week.FindAsync(entryResource.Week.Id);
+            var category = await categoryRepo.GetCategoryById(entryResource.Category.Id);
+            var week = await weekRepo.GetWeekById(entryResource.Week.Id);
             if (category == null)
             {
                 ModelState.AddModelError("Category", "Invalid category.");
@@ -54,8 +67,8 @@ namespace ACR2.Controllers
             var entry = mapper.Map<WeekEntryResource, WeekEntry>(entryResource);
             entry.LastUpdated = DateTime.Now;
 
-            context.WeekEntry.Add(entry);
-            await context.SaveChangesAsync();
+            entryRepo.AddEntry(entry);
+            await uw.CompleteAsync();
 
             var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
 
@@ -65,18 +78,18 @@ namespace ACR2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateWeekEntry(int id, [FromBody] WeekEntryResource entryResource)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var entry = await context.WeekEntry.Include(e => e.Category).Include(e => e.Week).SingleOrDefaultAsync(e => e.Id == id); 
-            
-            if(entry == null)
+            var entry = await entryRepo.GetEntryById(id);
+
+            if (entry == null)
                 return NotFound();
-            
+
             mapper.Map<WeekEntryResource, WeekEntry>(entryResource);
             entry.LastUpdated = DateTime.Now;
 
-            await context.SaveChangesAsync();
+            await uw.CompleteAsync();
 
             var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
 
@@ -86,13 +99,13 @@ namespace ACR2.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWeekEntry(int id)
         {
-            var entry = await context.WeekEntry.FindAsync(id);
+            var entry = await entryRepo.GetEntryById(id, loadFull: false);
 
-            if(entry == null)
+            if (entry == null)
                 return NotFound();
-            
-            context.Remove(entry);
-            await context.SaveChangesAsync();
+
+            entryRepo.RemoveEntry(entry);
+            await uw.CompleteAsync();
 
             return Ok(id);
         }
@@ -100,9 +113,9 @@ namespace ACR2.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWeekEntry(int id)
         {
-            var entry = await context.WeekEntry.Include(e => e.Category).Include(e => e.Week).SingleOrDefaultAsync(e => e.Id == id);
+            var entry = await entryRepo.GetEntryById(id);
 
-            if(entry == null)
+            if (entry == null)
                 return NotFound();
 
             var entryResource = mapper.Map<WeekEntry, WeekEntryResource>(entry);

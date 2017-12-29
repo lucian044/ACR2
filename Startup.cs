@@ -25,6 +25,14 @@ namespace ACR2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IWeekEntryRepository, WeekEntryRepository>();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<IWeekRepository, WeekRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddAutoMapper();
 
             services.AddDbContext<ACRDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
