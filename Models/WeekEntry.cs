@@ -21,6 +21,7 @@ namespace ACR2.Models
         public int Fri { get; set; }
         [Required]
         public int WeekId { get; set; }
+        public Week Week { get; set; }
         [Required]
         public DateTime LastUpdated { get; set; }
     }
