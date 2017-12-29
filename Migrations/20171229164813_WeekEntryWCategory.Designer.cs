@@ -11,9 +11,10 @@ using System;
 namespace ACR2.Migrations
 {
     [DbContext(typeof(ACRDbContext))]
-    partial class ACRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171229164813_WeekEntryWCategory")]
+    partial class WeekEntryWCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

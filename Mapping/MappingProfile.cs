@@ -12,14 +12,13 @@ namespace ACR2.Mapping
             CreateMap<Category, CategoryResource>();
             CreateMap<Week, WeekResource>();
             CreateMap<WeekEntry, WeekEntryResource>()
-                .ForPath(wer => wer.Category.Id, opt => opt.MapFrom(we => we.CategoryId))
                 .ForPath(wer => wer.Week.Id, opt => opt.MapFrom(we => we.WeekId));
             CreateMap<WeekNumber, WeekNumberResource>();
 
             //API Resource to Domain
             CreateMap<WeekEntryResource, WeekEntry>()
                 .ForMember(we => we.Id, opt => opt.Ignore())
-                .ForMember(we => we.CategoryId, opt => opt.MapFrom(wer => wer.Category.Id))
+                .ForMember(we => we.Category, opt => opt.MapFrom(wer => wer.Category))
                 .ForMember(we => we.WeekId, opt => opt.MapFrom(wer => wer.Week.Id));
 
         }

@@ -24,7 +24,7 @@ namespace ACR2.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries()
         {
-            var entries = await context.WeekEntry.ToListAsync();
+            var entries = await context.WeekEntry.Include(e => e.Category).ToListAsync();
 
             var result = mapper.Map<List<WeekEntry>, List<WeekEntryResource>>(entries);
 
@@ -73,20 +73,52 @@ namespace ACR2.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var entry = await context.WeekEntry.FindAsync(id); 
+            var entry = await context.WeekEntry.Include(e => e.Category).SingleOrDefaultAsync(e => e.Id == id); 
+            
+            if(entry == null)
+                return NotFound();
+            
             mapper.Map<WeekEntryResource, WeekEntry>(entryResource, entry);
             entry.LastUpdated = DateTime.Now;
 
             await context.SaveChangesAsync();
 
             var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
-            result.Category.Name = context.Category.Find(result.Category.Id).Name;
-            result.Category.Number = context.Category.Find(result.Category.Id).Number;
-            result.Week.Quarter = context.Week.Find(result.Week.Id).Quarter;
-            result.Week.Year = context.Week.Find(result.Week.Id).Year;
-            result.Week.Number = context.Week.Find(result.Week.Id).Number;
+            // result.Week.Quarter = context.Week.Find(result.Week.Id).Quarter;
+            // result.Week.Year = context.Week.Find(result.Week.Id).Year;
+            // result.Week.Number = context.Week.Find(result.Week.Id).Number;
 
             return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteWeekEntry(int id)
+        {
+            var entry = await context.WeekEntry.FindAsync(id);
+
+            if(entry == null)
+                return NotFound();
+            
+            context.Remove(entry);
+            await context.SaveChangesAsync();
+
+            return Ok(id);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetWeekEntry(int id)
+        {
+            var entry = await context.WeekEntry.Include(e => e.Category).SingleOrDefaultAsync(e => e.Id == id);
+
+            if(entry == null)
+                return NotFound();
+
+            var entryResource = mapper.Map<WeekEntry, WeekEntryResource>(entry);
+            // entryResource.Week.Quarter = context.Week.Find(entryResource.Week.Id).Quarter;
+            // entryResource.Week.Year = context.Week.Find(entryResource.Week.Id).Year;
+            // entryResource.Week.Number = context.Week.Find(entryResource.Week.Id).Number;
+
+            return Ok(entryResource);
         }
     }
 }

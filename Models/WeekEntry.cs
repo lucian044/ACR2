@@ -8,6 +8,7 @@ namespace ACR2.Models
         public int Id { get; set; }
         [Required]
         public int CategoryId { get; set; }
+        public Category Category { get; set; }
         [Required]
         public int Mon { get; set; }
         [Required]
