@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ACR2.Models;
 
-namespace ACR2.Persistence
+namespace ACR2.Core
 {
     public interface ICategoryRepository
     {

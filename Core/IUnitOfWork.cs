@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace ACR2.Persistence
+namespace ACR2.Core
 {
     public interface IUnitOfWork
     {
