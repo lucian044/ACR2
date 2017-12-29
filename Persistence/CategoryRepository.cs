@@ -4,6 +4,7 @@ using ACR2.Models.Resources;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using ACR2.Models;
+using ACR2.Core;
 
 namespace ACR2.Persistence
 {
