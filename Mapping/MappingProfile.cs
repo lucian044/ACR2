@@ -5,7 +5,7 @@ using AutoMapper;
 namespace ACR2.Mapping
 {
     public class MappingProfile : Profile
-    {
+    { 
         public MappingProfile()
         {
             // Domain to API Resource
