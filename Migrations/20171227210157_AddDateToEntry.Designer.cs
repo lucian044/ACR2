@@ -11,9 +11,10 @@ using System;
 namespace ACR2.Migrations
 {
     [DbContext(typeof(ACRDbContext))]
-    partial class ACRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171227210157_AddDateToEntry")]
+    partial class AddDateToEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,8 +76,6 @@ namespace ACR2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("WeekId");
 
                     b.ToTable("WeekEntry");
@@ -96,12 +95,7 @@ namespace ACR2.Migrations
 
             modelBuilder.Entity("ACR2.Models.WeekEntry", b =>
                 {
-                    b.HasOne("ACR2.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ACR2.Models.Week", "Week")
+                    b.HasOne("ACR2.Models.Week")
                         .WithMany("Entries")
                         .HasForeignKey("WeekId")
                         .OnDelete(DeleteBehavior.Cascade);

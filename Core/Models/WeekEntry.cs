@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ACR2.Models
@@ -6,6 +7,7 @@ namespace ACR2.Models
     {
         public int Id { get; set; }
         [Required]
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         [Required]
         public int Mon { get; set; }
@@ -17,7 +19,10 @@ namespace ACR2.Models
         public int Thurs { get; set; }
         [Required]
         public int Fri { get; set; }
-        public Week Week { get; set; }
+        [Required]
         public int WeekId { get; set; }
+        public Week Week { get; set; }
+        [Required]
+        public DateTime LastUpdated { get; set; }
     }
 }
