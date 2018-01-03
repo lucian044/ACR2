@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ACR2.Core;
+using ACR2.Core.Models.Resources;
 using ACR2.Models;
 using ACR2.Models.Resources;
 using ACR2.Persistence;
@@ -47,17 +48,13 @@ namespace ACR2.Controllers
         }
 
         [HttpPost("post")]
-        public async Task<IActionResult> CreateWeekEntry([FromBody] WeekEntryResource entryResource)
+        public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             var category = await categoryRepo.GetCategoryById(entryResource.CategoryId);
-            var catResource = mapper.Map<Category, CategoryResource>(category);
             var week = await weekRepo.GetWeekById(entryResource.WeekId);
-            var weekResouce = mapper.Map<Week, WeekResource>(week);
-            entryResource.Category = catResource;
-            entryResource.Week = weekResouce;
             if (category == null)
             {
                 ModelState.AddModelError("Category", "Invalid category.");
@@ -69,7 +66,7 @@ namespace ACR2.Controllers
                 return BadRequest(ModelState);
             }
 
-            var entry = mapper.Map<WeekEntryResource, WeekEntry>(entryResource);
+            var entry = mapper.Map<SaveWeekEntryResource, WeekEntry>(entryResource);
             entry.LastUpdated = DateTime.Now;
 
             entryRepo.AddEntry(entry);

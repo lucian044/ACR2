@@ -1,3 +1,4 @@
+using ACR2.Core.Models.Resources;
 using ACR2.Models;
 using ACR2.Models.Resources;
 using AutoMapper;
@@ -24,6 +25,8 @@ namespace ACR2.Mapping
                 .ForMember(we => we.Week, opt => opt.MapFrom(wer => wer.Week));
             CreateMap<CategoryResource, Category>();
             CreateMap<WeekResource, Week>();
+            CreateMap<SaveWeekEntryResource, WeekEntry>();
+
                 
 
         }
