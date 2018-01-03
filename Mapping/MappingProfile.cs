@@ -25,7 +25,8 @@ namespace ACR2.Mapping
                 .ForMember(we => we.Week, opt => opt.MapFrom(wer => wer.Week));
             CreateMap<CategoryResource, Category>();
             CreateMap<WeekResource, Week>();
-            CreateMap<SaveWeekEntryResource, WeekEntry>();
+            CreateMap<SaveWeekEntryResource, WeekEntry>()
+                .ForMember(we => we.Id, opt => opt.Ignore());
 
                 
 

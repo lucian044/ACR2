@@ -1,5 +1,6 @@
 import { WeekEntryService } from './../../services/weekentry.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-week-form',
@@ -12,7 +13,8 @@ export class WeekEntryFormComponent implements OnInit {
   entry: any = {};
 
   constructor(
-    private weekEntryService: WeekEntryService) { }
+    private weekEntryService: WeekEntryService,
+    private toastyService: ToastyService) { }
 
   ngOnInit() {
     this.weekEntryService.getCategories().subscribe(categories => 
