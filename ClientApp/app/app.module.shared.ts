@@ -1,3 +1,4 @@
+import * as Raven from 'raven-js';
 import { WeekEntryFormComponent } from './components/weekentry-form/weekentry-form.component';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { WeekEntryService } from './services/weekentry.service';
 import { AppErrorHandler } from './app.error-handler';
+
+Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').install();
 
 @NgModule({ 
     declarations: [
