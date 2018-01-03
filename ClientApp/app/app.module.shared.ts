@@ -1,5 +1,5 @@
 import { WeekEntryFormComponent } from './components/weekentry-form/weekentry-form.component';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -12,17 +12,16 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { WeekEntryService } from './services/weekentry.service';
-import { ErrorHandler } from '@angular/core/src/error_handler';
 import { AppErrorHandler } from './app.error-handler';
 
-@NgModule({
+@NgModule({ 
     declarations: [
         AppComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        WeekEntryFormComponent
+        WeekEntryFormComponent,
     ],
     imports: [
         CommonModule,

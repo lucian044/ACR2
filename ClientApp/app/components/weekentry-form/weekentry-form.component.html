@@ -48,5 +48,5 @@
     <input id="fri" type="text" class="form-control" [(ngModel)]="entry.fri" name="fri" required #fri="ngModel">
     <div class="alert alert-danger" *ngIf="fri.touched && !fri.valid">Please specify a value for Friday.</div>
   </div>
-  <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  <button class="btn btn-primary">Submit</button>
 </form>
