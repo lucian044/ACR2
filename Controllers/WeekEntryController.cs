@@ -50,7 +50,6 @@ namespace ACR2.Controllers
         [HttpPost("post")]
         public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
         {
-            throw new Exception();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 

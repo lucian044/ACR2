@@ -25,8 +25,15 @@ export class WeekEntryFormComponent implements OnInit {
   }
 
   submit(){
-    this.weekEntryService.create(this.entry)
-      .subscribe(x => console.log(x));
+   this.weekEntryService.create(this.entry)
+      .subscribe(x => 
+        this.toastyService.success({
+          title: 'Success',
+          msg: 'Successfully added a Week Entry',
+          theme: 'bootstrap',
+          showClose: true,
+          timeout: 5000
+      })
+    );
   }
-
 }
