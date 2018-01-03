@@ -52,8 +52,12 @@ namespace ACR2.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var category = await categoryRepo.GetCategoryById(entryResource.Category.Id);
-            var week = await weekRepo.GetWeekById(entryResource.Week.Id);
+            var category = await categoryRepo.GetCategoryById(entryResource.CategoryId);
+            var catResource = mapper.Map<Category, CategoryResource>(category);
+            var week = await weekRepo.GetWeekById(entryResource.WeekId);
+            var weekResouce = mapper.Map<Week, WeekResource>(week);
+            entryResource.Category = catResource;
+            entryResource.Week = weekResouce;
             if (category == null)
             {
                 ModelState.AddModelError("Category", "Invalid category.");

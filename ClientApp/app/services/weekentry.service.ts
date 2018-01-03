@@ -17,4 +17,9 @@ export class WeekEntryService {
       .map(res => res.json());
   }
 
+  create(entry: any){
+    return this.http.post('/api/weekentries/post', entry)
+      .map(res => res.json());
+  }
+
 }
