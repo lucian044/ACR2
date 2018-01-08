@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ACR2.Core;
+using ACR2.Core.Models;
 using ACR2.Core.Models.Resources;
 using ACR2.Models;
 using ACR2.Models.Resources;
@@ -37,9 +38,10 @@ namespace ACR2.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries()
+        public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries(FilterResource filterResource)
         {
-            var entries = await entryRepo.GetAllEntries();
+            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var entries = await entryRepo.GetAllEntries(filter);
 
             var result = mapper.Map<IEnumerable<WeekEntry>, IEnumerable<WeekEntryResource>>(entries);
 

@@ -1,7 +1,38 @@
-<h2>Week Entries</h2>
+<h2>Week Entries: 2017</h2>
 <p>
   <a [routerLink]="['/weekentries/new']" class="btn btn-primary">New Week Entry</a>
 </p>
+<div class="well">
+  <div class="form-group">
+    <label for="week">Quarter</label>
+    <select id="week" class="form-control" [(ngModel)]="filter.quarter" (change)="onFilterChange()">
+      <option value=""></option>
+      <option vlaue="1">1</option>
+      <option vlaue="1">2</option>
+      <option vlaue="1">3</option>
+      <option vlaue="1">4</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="week">Week</label>
+    <select id="week" class="form-control" [(ngModel)]="filter.week" (change)="onFilterChange()">
+      <option value=""></option>
+      <option vlaue="1">1</option>
+      <option vlaue="1">2</option>
+      <option vlaue="1">3</option>
+      <option vlaue="1">4</option>
+      <option vlaue="1">5</option>
+      <option vlaue="1">6</option>
+      <option vlaue="1">7</option>
+      <option vlaue="1">8</option>
+      <option vlaue="1">9</option>
+      <option vlaue="1">10</option>
+      <option vlaue="1">11</option>
+    </select>
+  </div>
+  <button class="btn btn-deffault" (click)="resetFilter()">Reset</button>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -15,7 +46,6 @@
   <tbody>
     <tr *ngFor="let e of entries">
       <td>{{ e.id }}</td>
-      <td>{{ e.week.year }}</td>
       <td>{{ e.week.quarter }}</td>
       <td>{{ e.week.number }}</td>
       <td>{{ e.category.number }}</td>

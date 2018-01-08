@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using ACR2.Models;
 using ACR2.Core;
+using ACR2.Core.Models;
+using System.Linq;
 
 namespace ACR2.Persistence
 {
@@ -16,14 +18,25 @@ namespace ACR2.Persistence
             this.context = context;
         }
 
-        public async Task<IEnumerable<WeekEntry>> GetAllEntries()
+        public async Task<IEnumerable<WeekEntry>> GetAllEntries(Filter filter)
         {
-            return await context.WeekEntry.Include(e => e.Category).Include(e => e.Week).ToListAsync();
+            var query = context.WeekEntry.Include(e => e.Category).Include(e => e.Week).AsQueryable();
+
+            if (filter.Quarter.HasValue)
+                query = query.Where(e => e.Week.Quarter == filter.Quarter.Value);
+
+            if (filter.Week.HasValue)
+                query = query.Where(e => e.Week.Number == filter.Week.Value);
+
+            if (filter.Category.HasValue)
+                query = query.Where(e => e.CategoryId == filter.Category.Value);
+
+            return await query.ToListAsync();
         }
 
         public async Task<WeekEntry> GetEntryById(int id, bool loadFull = true)
         {
-            if(!loadFull)
+            if (!loadFull)
                 return await context.WeekEntry.FindAsync(id);
 
             return await context.WeekEntry

@@ -6,7 +6,7 @@ export interface Category {
 
 export interface Week {
     id: number; 
-    quater: number; 
+    quarter: number; 
     number: number; 
     year: number; 
     entries: Array<any>;
