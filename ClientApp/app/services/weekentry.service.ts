@@ -22,4 +22,9 @@ export class WeekEntryService {
       .map(res => res.json());
   }
 
+  getWeekEntry(id: any){
+    return this.http.get('/api/weekentries/' + id)
+      .map(res => res.json());
+  }
+
 }
