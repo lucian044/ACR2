@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import  'rxjs/add/operator/map';
+import { SaveWeekEntry } from '../models/weekentry';
 
 @Injectable()
 export class WeekEntryService {
@@ -17,7 +18,9 @@ export class WeekEntryService {
       .map(res => res.json());
   }
 
-  create(entry: any){
+  create(entry: SaveWeekEntry){
+    console.log('Angular create method');
+    console.log(entry.id);
     return this.http.post('/api/weekentries/post', entry)
       .map(res => res.json());
   }
@@ -25,6 +28,12 @@ export class WeekEntryService {
   getWeekEntry(id: any){
     return this.http.get('/api/weekentries/' + id)
       .map(res => res.json());
+  }
+
+  update(entry: SaveWeekEntry){
+    return this.http.put('/api/weekentries/' + entry.id, entry)
+      .map(res => res.json);
+
   }
 
 }

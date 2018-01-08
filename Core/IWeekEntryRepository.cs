@@ -14,5 +14,7 @@ namespace ACR2.Core
 
         void RemoveEntry(WeekEntry entry);
 
+        void UpdateEntry(WeekEntry entry);
+
     }
 }

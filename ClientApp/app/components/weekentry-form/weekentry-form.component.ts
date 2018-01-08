@@ -23,8 +23,7 @@ export class WeekEntryFormComponent implements OnInit {
     tue: 0,
     wed: 0,
     thurs: 0,
-    fri: 0,
-    lastUpdated: ''
+    fri: 0
   };
 
   constructor(
@@ -33,10 +32,10 @@ export class WeekEntryFormComponent implements OnInit {
     private weekEntryService: WeekEntryService,
     private toastyService: ToastyService) {
 
-      route.params.subscribe( p=> {
-        this.entry.id = +p['id'];
-      });
-     }
+    route.params.subscribe(p => {
+      this.entry.id = +p['id'];
+    });
+  }
 
   ngOnInit() {
     var sources = [
@@ -44,22 +43,22 @@ export class WeekEntryFormComponent implements OnInit {
       this.weekEntryService.getWeeks(),
     ];
 
-    if(this.entry.id)
+    if (this.entry.id)
       sources.push(this.weekEntryService.getWeekEntry(this.entry.id));
 
     Observable.forkJoin(sources).subscribe(data => {
       this.categories = data[0];
       this.weeks = data[1];
-      if(this.entry.id){
+      if (this.entry.id) {
         this.setWeekEntry(data[2]);
       }
     }, err => {
-      if(err.status == 404)
+      if (err.status == 404)
         this.router.navigate(['/home']);
     });
   }
 
-  private setWeekEntry(e: WeekEntry){
+  private setWeekEntry(e: WeekEntry) {
     this.entry.id = e.id;
     this.entry.weekId = e.week.id;
     this.entry.categoryId = e.category.id;
@@ -68,19 +67,32 @@ export class WeekEntryFormComponent implements OnInit {
     this.entry.wed = e.wed;
     this.entry.thurs = e.thurs;
     this.entry.fri = e.fri;
-    this.entry.lastUpdated = e.lastUpdated;
   }
 
-  submit(){
-   this.weekEntryService.create(this.entry)
-      .subscribe(x => 
-        this.toastyService.success({
-          title: 'Success',
-          msg: 'Successfully added a Week Entry',
-          theme: 'bootstrap',
-          showClose: true,
-          timeout: 5000
-      })
-    );
+  submit() {
+    if (this.entry.id) {
+      this.weekEntryService.update(this.entry)
+        .subscribe(x => {
+          this.toastyService.success({
+            title: 'Success',
+            msg: 'The Week Entry was successfully updated.',
+            theme: 'bootstrap',
+            timeout: 5000
+          });
+        });
+    }
+    else {
+      console.log(this.entry.id);
+      this.weekEntryService.create(this.entry)
+        .subscribe(x => {
+          this.toastyService.success({
+            title: 'Success',
+            msg: 'Successfully added a Week Entry',
+            theme: 'bootstrap',
+            showClose: true,
+            timeout: 5000
+          })
+        });
+    }
   }
 }

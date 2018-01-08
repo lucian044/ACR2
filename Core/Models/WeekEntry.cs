@@ -12,7 +12,7 @@ namespace ACR2.Models
         [Required]
         public int Mon { get; set; }
         [Required]
-        public int Tue { get; set; }
+        public int Tue { get; set; } 
         [Required]
         public int Wed { get; set; }
         [Required]

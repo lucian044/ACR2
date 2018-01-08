@@ -78,7 +78,7 @@ namespace ACR2.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateWeekEntry(int id, [FromBody] WeekEntryResource entryResource)
+        public async Task<IActionResult> UpdateWeekEntry(int id, [FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -88,11 +88,14 @@ namespace ACR2.Controllers
             if (entry == null)
                 return NotFound();
 
-            mapper.Map<WeekEntryResource, WeekEntry>(entryResource);
+            mapper.Map<SaveWeekEntryResource, WeekEntry>(entryResource, entry);
             entry.LastUpdated = DateTime.Now;
+            entry.Category = await categoryRepo.GetCategoryById(entry.CategoryId);
+            entry.Week = await weekRepo.GetWeekById(entry.WeekId);
 
             await uw.CompleteAsync();
 
+            entry = await entryRepo.GetEntryById(entry.Id);
             var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
 
             return Ok(result);

@@ -33,5 +33,4 @@ export interface SaveWeekEntry {
     wed: number;
     thurs: number;
     fri: number;
-    lastUpdated: string;
 }

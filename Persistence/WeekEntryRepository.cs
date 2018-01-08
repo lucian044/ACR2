@@ -41,5 +41,10 @@ namespace ACR2.Persistence
         {
             context.WeekEntry.Remove(entry);
         }
+
+        public void UpdateEntry(WeekEntry entry)
+        {
+            context.WeekEntry.Update(entry);
+        }
     }
 }
