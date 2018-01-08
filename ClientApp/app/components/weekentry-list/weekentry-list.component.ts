@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeekEntryListComponent implements OnInit {
   entries: WeekEntry[];
-  allEntries: WeekEntry[];
   weeks: Week[];
   filter: any = {};
   columns = [
@@ -25,29 +24,25 @@ export class WeekEntryListComponent implements OnInit {
     {}
   ];
 
-  constructor(private weekEntryService: WeekEntryService) {}
+  constructor(private weekEntryService: WeekEntryService) { }
 
   ngOnInit() {
     this.weekEntryService.getWeeks()
       .subscribe(weeks => this.weeks = weeks);
 
-    this.weekEntryService.getWeekEntries()
-      .subscribe(entries => this.entries = this.allEntries = entries);
+      this.populateEntries();
+  }
+
+  private populateEntries() {
+    this.weekEntryService.getWeekEntries(this.filter)
+      .subscribe(entries => this.entries = entries);
   }
 
   onFilterChange() {
-    var entries = this.allEntries;
-
-    if (this.filter.week)
-      entries = entries.filter(e => e.week.number == this.filter.week);
-
-    if(this.filter.quarter)
-    entries = entries.filter(e => e.week.quarter == this.filter.quarter);
-    
-    this.entries = entries;
+    this.populateEntries();
   }
 
-  resetFilter(){
+  resetFilter() {
     this.filter = {};
     this.onFilterChange();
   }

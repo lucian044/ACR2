@@ -7,27 +7,47 @@
     <label for="week">Quarter</label>
     <select id="week" class="form-control" [(ngModel)]="filter.quarter" (change)="onFilterChange()">
       <option value=""></option>
-      <option vlaue="1">1</option>
-      <option vlaue="1">2</option>
-      <option vlaue="1">3</option>
-      <option vlaue="1">4</option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option value="1">3</option>
+      <option value="1">4</option>
     </select>
   </div>
   <div class="form-group">
     <label for="week">Week</label>
     <select id="week" class="form-control" [(ngModel)]="filter.week" (change)="onFilterChange()">
       <option value=""></option>
-      <option vlaue="1">1</option>
-      <option vlaue="1">2</option>
-      <option vlaue="1">3</option>
-      <option vlaue="1">4</option>
-      <option vlaue="1">5</option>
-      <option vlaue="1">6</option>
-      <option vlaue="1">7</option>
-      <option vlaue="1">8</option>
-      <option vlaue="1">9</option>
-      <option vlaue="1">10</option>
-      <option vlaue="1">11</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="week">Category</label>
+    <select id="week" class="form-control" [(ngModel)]="filter.category" (change)="onFilterChange()">
+      <option value=""></option>
+      <option value="1">1. Governance, Leadership, and Strategic Planning</option>
+      <option value="2">2. Student and Other Stakeholder Focus</option>
+      <option value="3">3. Faculty and Staff Focus</option>
+      <option value="4">4. Educational Programs and Support</option>
+      <option value="5">5. Data Driven Improvement</option>
+      <option value="6">6. Chartered Nonpublic Schools</option>
+      <option value="7">7. Teacher Residency</option>
+      <option value="8">8. Professional or Associate License Renewal</option>
+      <option value="9">9. Transportation of Pupils</option>
+      <option value="10">10. Federally Funded Education Programs</option>
+      <option value="11">11. Unemployment and Workers Compensation</option>
+      <option value="12">12. Pupil Appraisal</option>
+      <option value="13">13. Health and Health Testing</option>
+      <option value="14">14. Other</option>
     </select>
   </div>
   <button class="btn btn-deffault" (click)="resetFilter()">Reset</button>
