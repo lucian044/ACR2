@@ -38,4 +38,9 @@ export class WeekEntryService {
       .map(res => res.json());
   }
 
+  getWeekEntries(){
+    return this.http.get('/api/weekentries')
+      .map(res => res.json());
+  }
+
 }

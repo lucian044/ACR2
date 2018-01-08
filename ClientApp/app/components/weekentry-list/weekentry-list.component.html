@@ -1,0 +1,32 @@
+<h2>Week Entries</h2>
+<p>
+  <a [routerLink]="['/weekentries/new']" class="btn btn-primary">New Week Entry</a>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns">
+        <div>
+          {{ c.title }}
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of entries">
+      <td>{{ e.id }}</td>
+      <td>{{ e.week.year }}</td>
+      <td>{{ e.week.quarter }}</td>
+      <td>{{ e.week.number }}</td>
+      <td>{{ e.category.number }}</td>
+      <td>{{ e.mon }}</td>
+      <td>{{ e.tue }}</td>
+      <td>{{ e.wed }}</td>
+      <td>{{ e.thurs }}</td>
+      <td>{{ e.fri }}</td>
+      <td>
+        <a [routerLink]="['/weekentries/', e.id]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

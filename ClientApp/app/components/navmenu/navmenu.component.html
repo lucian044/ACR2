@@ -17,6 +17,11 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/weekentries']">
+                        <span class='glyphicon glyphicon-th-list'></span> Week Entries
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/weekentries/new']">
                         <span class='glyphicon glyphicon-plus'></span> New Week Entry
