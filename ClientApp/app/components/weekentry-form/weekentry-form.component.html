@@ -49,4 +49,5 @@
     <div class="alert alert-danger" *ngIf="fri.touched && !fri.valid">Please specify a value for Friday.</div>
   </div>
   <button class="btn btn-primary">Submit</button>
+  <button *ngIf="entry.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
 </form>

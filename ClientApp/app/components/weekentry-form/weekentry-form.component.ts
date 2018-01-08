@@ -82,7 +82,6 @@ export class WeekEntryFormComponent implements OnInit {
         });
     }
     else {
-      console.log(this.entry.id);
       this.weekEntryService.create(this.entry)
         .subscribe(x => {
           this.toastyService.success({
@@ -94,5 +93,13 @@ export class WeekEntryFormComponent implements OnInit {
           })
         });
     }
+  }
+
+  delete(){
+    if(confirm("Are you sure you want to delete this entry?"))
+      this.weekEntryService.delete(this.entry.id)
+        .subscribe(x => {
+          this.router.navigate(['/home']);
+        });
   }
 }

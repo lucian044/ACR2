@@ -19,8 +19,6 @@ export class WeekEntryService {
   }
 
   create(entry: SaveWeekEntry){
-    console.log('Angular create method');
-    console.log(entry.id);
     return this.http.post('/api/weekentries/post', entry)
       .map(res => res.json());
   }
@@ -33,7 +31,11 @@ export class WeekEntryService {
   update(entry: SaveWeekEntry){
     return this.http.put('/api/weekentries/' + entry.id, entry)
       .map(res => res.json);
+  }
 
+  delete(id: any){
+    return this.http.delete('/api/weekentries/' + id)
+      .map(res => res.json());
   }
 
 }
