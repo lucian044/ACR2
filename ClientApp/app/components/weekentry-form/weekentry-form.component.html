@@ -1,42 +1,53 @@
 <h1>New Week Entry</h1>
-<h3>Year: {{ weeks[weeks.length - 1].year }}</h3>
-<h3>Quarter: {{ weeks[weeks.length - 1].quarter }}</h3>
+<p>
+  {{ entry | json}}
+</p>
+<h3>Year: 2017</h3>
+<h3>Quarter: 1</h3>
 
-<form>
+<form #f="ngForm" (ngSubmit)="submit()"> 
   <div class="form-group">
     <label for="week">Week Number</label>
-    <select id="week" class="form-control">
+    <select id="week" class="form-control" [(ngModel)]="entry.weekId" name="weekId" required #week="ngModel">
       <option value=""></option>
       <option *ngFor="let w of weeks" value="{{ w.id }}">{{ w.number }}</option>
     </select>
+    <div class="alert alert-danger" *ngIf="week.touched && !week.valid">Please specify a week.</div>
   </div>
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" class="form-control">
+    <select id="category" class="form-control" [(ngModel)]="entry.categoryId" name="categoryId" required #category="ngModel">
       <option value=""></option>
       <option *ngFor="let c of categories" value="{{ c.id }}">{{ c.name }}</option>
     </select>
+    <div class="alert alert-danger" *ngIf="category.touched && !category.valid">Please specify a category.</div>
   </div>
   <h2>Minutes Per Day</h2>
   <div class="form-group">
     <label for="">Moday</label>
-    <input id="mon" type="text" class="form-control">
+    <input id="mon" type="text" class="form-control" [(ngModel)]="entry.mon" name="mon" required #mon="ngModel">
+    <div class="alert alert-danger" *ngIf="mon.touched && !mon.valid">Please specify a value for Monday.</div>
   </div>
   <div class="form-group">
     <label for="">Tuesday</label>
-    <input id="tue" type="text" class="form-control">
+    <input id="tue" type="text" class="form-control" [(ngModel)]="entry.tue" name="tue" required #tue="ngModel">
+    <div class="alert alert-danger" *ngIf="tue.touched && !tue.valid">Please specify a value for Tuesday.</div>
   </div>
   <div class="form-group">
     <label for="">Wednesday</label>
-    <input id="wed" type="text" class="form-control">
+    <input id="wed" type="text" class="form-control" [(ngModel)]="entry.wed" name="wed" required #wed="ngModel">
+    <div class="alert alert-danger" *ngIf="wed.touched && !wed.valid">Please specify a value for Wednesday.</div>
   </div>
   <div class="form-group">
     <label for="">Thursday</label>
-    <input id="thurs" type="text" class="form-control">
+    <input id="thurs" type="text" class="form-control" [(ngModel)]="entry.thurs" name="thurs" required #thurs="ngModel">
+    <div class="alert alert-danger" *ngIf="thurs.touched && !thurs.valid">Please specify a value for Thursday.</div>
   </div>
   <div class="form-group">
     <label for="">Friday</label>
-    <input id="fri" type="text" class="form-control">
+    <input id="fri" type="text" class="form-control" [(ngModel)]="entry.fri" name="fri" required #fri="ngModel">
+    <div class="alert alert-danger" *ngIf="fri.touched && !fri.valid">Please specify a value for Friday.</div>
   </div>
   <button class="btn btn-primary">Submit</button>
+  <button *ngIf="entry.id" class="btn btn-danger" type="button" (click)="delete()">Delete</button>
 </form>

@@ -1,0 +1,90 @@
+<h2>Week Entries: 2017</h2>
+<p>
+  <a [routerLink]="['/weekentries/new']" class="btn btn-primary">New Week Entry</a>
+</p>
+<div class="well">
+  <div class="form-group">
+    <label style="font-size: 20px">Filters</label>
+  </div>
+  <div class="form-group">
+    <label for="week">Quarter</label>
+    <select id="week" class="form-control" [(ngModel)]="query.quarter" (change)="onFilterChange()">
+      <option value=""></option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option value="1">3</option>
+      <option value="1">4</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="week">Week</label>
+    <select id="week" class="form-control" [(ngModel)]="query.week" (change)="onFilterChange()">
+      <option value=""></option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="week">Category</label>
+    <select id="week" class="form-control" [(ngModel)]="query.category" (change)="onFilterChange()">
+      <option value=""></option>
+      <option value="1">1. Governance, Leadership, and Strategic Planning</option>
+      <option value="2">2. Student and Other Stakeholder Focus</option>
+      <option value="3">3. Faculty and Staff Focus</option>
+      <option value="4">4. Educational Programs and Support</option>
+      <option value="5">5. Data Driven Improvement</option>
+      <option value="6">6. Chartered Nonpublic Schools</option>
+      <option value="7">7. Teacher Residency</option>
+      <option value="8">8. Professional or Associate License Renewal</option>
+      <option value="9">9. Transportation of Pupils</option>
+      <option value="10">10. Federally Funded Education Programs</option>
+      <option value="11">11. Unemployment and Workers Compensation</option>
+      <option value="12">12. Pupil Appraisal</option>
+      <option value="13">13. Health and Health Testing</option>
+      <option value="14">14. Other</option>
+    </select>
+  </div>
+  <button class="btn btn-deffault" (click)="resetFilter()">Reset</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns">
+        <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+          {{ c.title }}
+          <i *ngIf="query.sortBy === c.key" class="fa" [class.fa-sort-asc]="query.isSortAscending" [class.fa-sort-desc]="!query.isSortAscending"></i>
+        </div>
+        <div *ngIf="!c.isSortable">
+          {{ c.title }}
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of queryResult.items">
+      <td>{{ e.id }}</td>
+      <td>{{ e.week.quarter }}</td>
+      <td>{{ e.week.number }}</td>
+      <td>{{ e.category.number }}</td>
+      <td>{{ e.mon }}</td>
+      <td>{{ e.tue }}</td>
+      <td>{{ e.wed }}</td>
+      <td>{{ e.thurs }}</td>
+      <td>{{ e.fri }}</td>
+      <td>
+        <a [routerLink]="['/weekentries/', e.id]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
