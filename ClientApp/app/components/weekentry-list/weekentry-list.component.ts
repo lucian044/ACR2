@@ -15,7 +15,7 @@ export class WeekEntryListComponent implements OnInit {
     { title: 'Id' },
     { title: 'Quarter', key: 'quarter' },
     { title: 'Week', key: 'week' },
-    { title: 'Category', key: 'cat' },
+    { title: 'Category', key: 'category' },
     { title: 'Monday', key: 'mon' },
     { title: 'Tuesday', key: 'tue' },
     { title: 'Wednesday', key: 'wed' },

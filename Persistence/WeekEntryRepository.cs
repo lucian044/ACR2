@@ -7,6 +7,9 @@ using ACR2.Models;
 using ACR2.Core;
 using ACR2.Core.Models;
 using System.Linq;
+using System.Linq.Expressions;
+using System;
+using ACR2.Extensions;
 
 namespace ACR2.Persistence
 {
@@ -18,18 +21,30 @@ namespace ACR2.Persistence
             this.context = context;
         }
 
-        public async Task<IEnumerable<WeekEntry>> GetAllEntries(Filter filter)
+        public async Task<IEnumerable<WeekEntry>> GetAllEntries(WeekEntryQuery queryObj)
         {
             var query = context.WeekEntry.Include(e => e.Category).Include(e => e.Week).AsQueryable();
 
-            if (filter.Quarter.HasValue)
-                query = query.Where(e => e.Week.Quarter == filter.Quarter.Value);
+            if (queryObj.Quarter.HasValue)
+                query = query.Where(e => e.Week.Quarter == queryObj.Quarter.Value);
 
-            if (filter.Week.HasValue)
-                query = query.Where(e => e.Week.Number == filter.Week.Value);
+            if (queryObj.Week.HasValue)
+                query = query.Where(e => e.Week.Number == queryObj.Week.Value);
 
-            if (filter.Category.HasValue)
-                query = query.Where(e => e.CategoryId == filter.Category.Value);
+            if (queryObj.Category.HasValue)
+                query = query.Where(e => e.CategoryId == queryObj.Category.Value);
+
+            string str;
+            Expression<Func<WeekEntry, object>> exp;
+            var columnsMap = new Dictionary<string, Expression<Func<WeekEntry, object>>>()
+            {
+                ["quarter"] = e => e.Week.Quarter,
+                ["week"] = e => e.Week.Number,
+                ["category"] = e => e.CategoryId,
+                ["id"] = e => e.Id
+            };
+
+            query = query.ApplyOrdering(queryObj, columnsMap);
 
             return await query.ToListAsync();
         }

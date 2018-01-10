@@ -38,9 +38,9 @@ namespace ACR2.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries(FilterResource filterResource)
+        public async Task<IEnumerable<WeekEntryResource>> GetWeekEntries(WeekEntryQueryResource filterResource)
         {
-            var filter = mapper.Map<FilterResource, Filter>(filterResource);
+            var filter = mapper.Map<WeekEntryQueryResource, WeekEntryQuery>(filterResource);
             var entries = await entryRepo.GetAllEntries(filter);
 
             var result = mapper.Map<IEnumerable<WeekEntry>, IEnumerable<WeekEntryResource>>(entries);

@@ -20,7 +20,7 @@ namespace ACR2.Mapping
             CreateMap<WeekNumber, WeekNumberResource>();
 
             //API Resource to Domain
-            CreateMap<FilterResource, Filter>();
+            CreateMap<WeekEntryQueryResource, WeekEntryQuery>();
             CreateMap<WeekEntryResource, WeekEntry>()
                 .ForMember(we => we.Id, opt => opt.Ignore())
                 .ForMember(we => we.Category, opt => opt.MapFrom(wer => wer.Category))
