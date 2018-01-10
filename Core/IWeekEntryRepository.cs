@@ -7,7 +7,7 @@ namespace ACR2.Core
 {
     public interface IWeekEntryRepository
     {
-         Task<IEnumerable<WeekEntry>> GetAllEntries(WeekEntryQuery filter);
+         Task<QueryResult<WeekEntry>> GetAllEntries(WeekEntryQuery filter);
 
          Task<WeekEntry> GetEntryById(int id, bool loadFull = true);
 

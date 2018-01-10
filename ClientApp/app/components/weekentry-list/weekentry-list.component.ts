@@ -1,3 +1,4 @@
+import { PaginationComponent } from './../shared/pagination.component';
 import { WeekEntry, Week } from './../../models/weekentry';
 import { WeekEntryService } from './../../services/weekentry.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekentry-list.component.css']
 })
 export class WeekEntryListComponent implements OnInit {
-  entries: WeekEntry[];
+  private readonly PAGE_SIZE = 4;
+
+  queryResult: any = {};
   weeks: Week[];
-  query: any = {};
+  query: any = {
+    pageSize: this.PAGE_SIZE
+  };
   columns = [
     { title: 'Id' },
     { title: 'Quarter', key: 'quarter', isSortable: true },
@@ -35,16 +40,20 @@ export class WeekEntryListComponent implements OnInit {
 
   private populateEntries() {
     this.weekEntryService.getWeekEntries(this.query)
-      .subscribe(entries => this.entries = entries);
+      .subscribe(result => this.queryResult = result);
   }
 
   onFilterChange() {
+    this.query.page = 1;
     this.populateEntries();
   }
 
   resetFilter() {
-    this.query = {};
-    this.onFilterChange();
+    this.query = {
+      page: 1,
+      pageSize: this.PAGE_SIZE
+    };
+    this.populateEntries();
   }
 
   sortBy(columnName: any){
@@ -55,6 +64,11 @@ export class WeekEntryListComponent implements OnInit {
       this.query.sortBy = columnName;
       this.query.isSortAscending = true;
     }
+    this.populateEntries();
+  }
+
+  onPageChange(page: any){
+    this.query.page = page;
     this.populateEntries();
   }
 

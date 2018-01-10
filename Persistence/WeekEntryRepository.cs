@@ -21,8 +21,9 @@ namespace ACR2.Persistence
             this.context = context;
         }
 
-        public async Task<IEnumerable<WeekEntry>> GetAllEntries(WeekEntryQuery queryObj)
+        public async Task<QueryResult<WeekEntry>> GetAllEntries(WeekEntryQuery queryObj)
         {
+            var result = new QueryResult<WeekEntry>();
             var query = context.WeekEntry.Include(e => e.Category).Include(e => e.Week).AsQueryable();
 
             if (queryObj.Quarter.HasValue)
@@ -43,9 +44,13 @@ namespace ACR2.Persistence
 
             query = query.ApplyOrdering(queryObj, columnsMap);
 
+            result.TotalItems = await query.CountAsync();
+
             query = query.ApplyPaging(queryObj);
             
-            return await query.ToListAsync();
+            result.Items = await query.ToListAsync();
+
+            return result;
         }
 
         public async Task<WeekEntry> GetEntryById(int id, bool loadFull = true)

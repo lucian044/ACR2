@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/shared/pagination.component';
 import * as Raven from 'raven-js';
 import { WeekEntryFormComponent } from './components/weekentry-form/weekentry-form.component';
 import { WeekEntryListComponent } from './components/weekentry-list/weekentry-list.component';
@@ -27,6 +28,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         HomeComponent,
         WeekEntryFormComponent,
         WeekEntryListComponent,
+        PaginationComponent,
     ],
     imports: [
         CommonModule,

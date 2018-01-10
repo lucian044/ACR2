@@ -11,6 +11,7 @@ namespace ACR2.Mapping
         public MappingProfile()
         {
             // Domain to API Resource
+            CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Category, CategoryResource>();
             CreateMap<Week, WeekResource>()
                 .ForMember(wr => wr.Entries, opt => opt.Ignore());

@@ -71,7 +71,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let e of entries">
+    <tr *ngFor="let e of queryResult.items">
       <td>{{ e.id }}</td>
       <td>{{ e.week.quarter }}</td>
       <td>{{ e.week.number }}</td>
@@ -87,3 +87,4 @@
     </tr>
   </tbody>
 </table>
+<pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>
