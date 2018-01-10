@@ -25,7 +25,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
-        HomeComponent,
+        HomeComponent, 
         WeekEntryFormComponent,
         WeekEntryListComponent,
         PaginationComponent,

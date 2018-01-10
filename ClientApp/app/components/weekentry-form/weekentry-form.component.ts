@@ -33,7 +33,10 @@ export class WeekEntryFormComponent implements OnInit {
     private toastyService: ToastyService) {
 
     route.params.subscribe(p => {
-      this.entry.id = +p['id'];
+      if (+p['id'])
+        this.entry.id = +p['id'];
+      else  
+        this.entry.id = 0;
     });
   }
 
