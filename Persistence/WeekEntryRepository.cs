@@ -34,14 +34,11 @@ namespace ACR2.Persistence
             if (queryObj.Category.HasValue)
                 query = query.Where(e => e.CategoryId == queryObj.Category.Value);
 
-            string str;
-            Expression<Func<WeekEntry, object>> exp;
             var columnsMap = new Dictionary<string, Expression<Func<WeekEntry, object>>>()
             {
                 ["quarter"] = e => e.Week.Quarter,
                 ["week"] = e => e.Week.Number,
-                ["category"] = e => e.CategoryId,
-                ["id"] = e => e.Id
+                ["category"] = e => e.Category.Id
             };
 
             query = query.ApplyOrdering(queryObj, columnsMap);
