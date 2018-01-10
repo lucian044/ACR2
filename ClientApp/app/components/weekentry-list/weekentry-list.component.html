@@ -8,7 +8,7 @@
   </div>
   <div class="form-group">
     <label for="week">Quarter</label>
-    <select id="week" class="form-control" [(ngModel)]="filter.quarter" (change)="onFilterChange()">
+    <select id="week" class="form-control" [(ngModel)]="query.quarter" (change)="onFilterChange()">
       <option value=""></option>
       <option value="1">1</option>
       <option value="1">2</option>
@@ -18,7 +18,7 @@
   </div>
   <div class="form-group">
     <label for="week">Week</label>
-    <select id="week" class="form-control" [(ngModel)]="filter.week" (change)="onFilterChange()">
+    <select id="week" class="form-control" [(ngModel)]="query.week" (change)="onFilterChange()">
       <option value=""></option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -35,7 +35,7 @@
   </div>
   <div class="form-group">
     <label for="week">Category</label>
-    <select id="week" class="form-control" [(ngModel)]="filter.category" (change)="onFilterChange()">
+    <select id="week" class="form-control" [(ngModel)]="query.category" (change)="onFilterChange()">
       <option value=""></option>
       <option value="1">1. Governance, Leadership, and Strategic Planning</option>
       <option value="2">2. Student and Other Stakeholder Focus</option>
@@ -57,10 +57,23 @@
 </div>
 
 <table class="table">
-  <thead>
+  <!-- <thead>
     <tr>
       <th *ngFor="let c of columns">
         <div>
+          {{ c.title }}
+        </div>
+      </th>
+    </tr>
+  </thead> -->
+  <thead>
+    <tr>
+      <th *ngFor="let c of columns">
+        <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+          {{ c.title }}
+          <i *ngIf="query.sortBy === c.key" class="fa" [class.fa-sort-asc]="query.isSortAscending" [class.fa-sort-desc]="!query.isSortAscending"></i>
+        </div>
+        <div *ngIf="!c.isSortable">
           {{ c.title }}
         </div>
       </th>
