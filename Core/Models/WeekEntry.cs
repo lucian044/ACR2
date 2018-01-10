@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using ACR2.Core.Models;
 
 namespace ACR2.Models
 {
@@ -24,5 +27,11 @@ namespace ACR2.Models
         public Week Week { get; set; }
         [Required]
         public DateTime LastUpdated { get; set; }
+        public ICollection<Photo> Photos { get; set; }
+
+        public WeekEntry()
+        {
+            Photos = new Collection<Photo>();
+        }
     }
 }

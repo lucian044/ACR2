@@ -24,9 +24,9 @@ export class ViewWeekEntryComponent implements OnInit {
       }
     });
   }
-
+ 
   ngOnInit() { 
-    this.weekEntryService.getWeekEntries(this.entryId)
+    this.weekEntryService.getWeekEntry(this.entryId)
       .subscribe(
         e => this.entry = e,
         err => {
