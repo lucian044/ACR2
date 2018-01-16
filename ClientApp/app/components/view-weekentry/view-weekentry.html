@@ -1,0 +1,43 @@
+<h1>Week Entry</h1>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Week Entry</a></li>
+    <!-- <li role="presentation"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li> -->
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" *ngIf="entry">
+    <!-- Vehicle tab -->
+    <div role="tabpanel" class="tab-pane active" id="basic">
+      <h2>Basics</h2>
+      <ul>
+        <li>Year: {{ entry.week.year }}</li>
+        <li>Quarter: {{ entry.week.quarter }}</li>
+        <li>Week: {{ entry.week.number }}</li>
+        <li>Category: {{ entry.category.number }}. {{ entry.category.name }}</li>
+      </ul>
+      <h2>Times</h2>
+      <ul>
+        <li>Monday: {{ entry.mon }}</li>
+        <li>Tuesday: {{ entry.tue }}</li>
+        <li>Wednesday: {{ entry.wed }}</li>
+        <li>Thursday: {{ entry.thurs }}</li>
+        <li>Friday: {{ entry.fri }}</li>
+      </ul>
+      <br/>
+      <p>
+        <a class="btn btn-primary" [routerLink]="['/weekentries/edit/', entry.id]">Edit</a>
+        <button class="btn btn-danger" (click)="delete()">Delete</button>
+        <a class="btn btn-default" [routerLink]="['/weekentries']">View Week Entries</a>
+      </p>
+    </div>
+    <!-- Photos tab
+    <div role="tabpanel" class="tab-pane" id="photos">
+      <h2>Photos</h2>
+    </div> -->
+  </div>
+</div>
+
+
