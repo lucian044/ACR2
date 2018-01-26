@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { WeekEntryService } from './services/weekentry.service';
+import { AuthService } from './services/auth.service';
 import { AppErrorHandler } from './app.error-handler';
 
 Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').install();
@@ -51,7 +52,8 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        WeekEntryService
+        WeekEntryService,
+        AuthService
     ]
 })
 export class AppModuleShared {
