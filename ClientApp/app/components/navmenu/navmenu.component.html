@@ -19,10 +19,10 @@
                 </li>
                 <li [routerLinkActive]="['link-active']">
                     <a (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
-                        <span class='glyphicon glyphicon-home'></span> Login
+                        <span class='glyphicon glyphicon-user'></span> Login
                     </a>
                     <a (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
-                        <span class='glyphicon glyphicon-home'></span> Logout
+                        <span class='glyphicon glyphicon-user'></span> Logout
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">

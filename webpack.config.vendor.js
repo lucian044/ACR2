@@ -24,6 +24,7 @@ const nonTreeShakableModules = [
     'ng2-toasty',
     'ng2-toasty/bundles/style-bootstrap.css',
     'auth0-js',
+    'auth0-lock',
     'jquery',
     'raven-js',
     'underscore'
