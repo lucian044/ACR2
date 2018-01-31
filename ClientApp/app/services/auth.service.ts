@@ -9,6 +9,7 @@ import Auth0Lock from 'auth0-lock'
 export class AuthService {
     options = {
         allowShowPassword: true,
+        autoclose: true,
         auth: {
             audience: 'https://api.acr.com',
             params: { scope: 'openid email' },
