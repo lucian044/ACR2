@@ -60,7 +60,8 @@ namespace ACR2
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = true,
+                    HotModuleReplacementEndpoint = "/dist/__webpack_hmr"
                 });
             }
             else
