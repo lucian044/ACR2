@@ -22,21 +22,11 @@ export class AuthService {
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
     profile: any;
 
-    // auth0 = new auth0.WebAuth({
-    //     clientID: '7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn',
-    //     domain: 'acrproject.auth0.com',
-    //     responseType: 'token id_token',
-    //     audience: 'https://api.acr.com',
-    //     redirectUri: 'http://localhost:5000/weekentries',
-    //     scope: 'openid email'
-    // });
-
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
     }
 
     public login(): void {
-        //this.auth0.authorize();
         this.lock.show();
     }
 
@@ -46,8 +36,7 @@ export class AuthService {
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, function (error: any, profile: any) {
                 if (error) {
-                    // Handle error
-                    return;
+                    throw error;
                 }
                 const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
                 localStorage.setItem('access_token', authResult.accessToken);
@@ -55,41 +44,7 @@ export class AuthService {
                 localStorage.setItem('profile', JSON.stringify(profile));
             });
         });
-
-        // this.auth0.parseHash((err, authResult) => {
-        //     if (authResult && authResult.accessToken && authResult.idToken) {
-        //         window.location.hash = '';
-        //         this.setSession(authResult);
-        //         this.router.navigate(['/weekentries']);
-        //     } else if (err) {
-        //         this.router.navigate(['/home']);
-        //         console.log(err);
-        //     }
-        // });
     }
-
-    //     private setSession(authResult: any): void {
-    //         // Set the time that the access token will expire at
-    //         const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    //         localStorage.setItem('access_token', authResult.accessToken);
-    //         localStorage.setItem('id_token', authResult.idToken);
-    //         localStorage.setItem('expires_at', expiresAt);
-    //         this.lock.getProfile(authResult.accessToken, function (this: any, error: any, profile: any) {
-    //             if (error) {
-    //                 throw error;
-    //             }
-
-    //             localStorage.setItem("profile", JSON.stringify(profile));
-    //             this.profile = profile;
-    //         });
-    //         // this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
-    //         //     if (error)
-    //         //         throw error;
-    //         //     localStorage.setItem('profile', JSON.stringify(profile));
-    //         //     this.profile = profile;
-    //         // });
-
-    //     }
 
     public logout(): void {
         // Remove tokens and expiry time from localStorage
@@ -105,12 +60,6 @@ export class AuthService {
     }
 
     public isAuthenticated(): boolean {
-        // Check whether the current time is past the
-        // access token's expiry time
-        // var exp = localStorage.getItem('expires_at');
-        // if (exp == null)
-        //     exp = "";
-        // const expiresAt = JSON.parse(exp);
         return new Date().getTime() < Number(localStorage.getItem('expires_at'));
     }
 
