@@ -44,7 +44,7 @@ namespace ACR2.Controllers
             var queryResult = await entryRepo.GetAllEntries(filter);
 
             return mapper.Map<QueryResult<WeekEntry>, QueryResultResource<WeekEntryResource>>(queryResult);
-
+ 
         }
 
         [HttpPost("post")]

@@ -15,7 +15,7 @@ export class WeekEntryService {
   }
 
   getWeeks(){
-    return this.http.get('api/weeks')
+    return this.http.get('api/weeks') 
       .map(res => res.json());
   }
 
