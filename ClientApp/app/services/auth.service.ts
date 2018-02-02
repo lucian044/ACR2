@@ -5,7 +5,7 @@ import * as auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock'
 
 
-@Injectable()
+@Injectable() 
 export class AuthService {
     options = {
         allowShowPassword: true,
@@ -13,10 +13,8 @@ export class AuthService {
         auth: {
             audience: 'https://api.acr.com',
             params: { scope: 'openid email' },
-            redirect: false,
             redirectUrl: 'http://localhost:5000/weekentries',
-            responseType: "token",
-            sso: false
+            responseType: "token id_token",
         }
     }
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
@@ -24,6 +22,7 @@ export class AuthService {
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
+        this.lock.on('unrecoverable_error', console.error.bind(console));
     }
 
     public login(): void {
