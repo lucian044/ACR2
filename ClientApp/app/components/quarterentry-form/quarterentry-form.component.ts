@@ -14,20 +14,20 @@ import 'rxjs/add/Observable/forkJoin';
 })
 export class QuarterEntryFormComponent implements OnInit {
   entries: SaveWeekEntry[] = [
-    { id: 0, categoryId: 1, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 2, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 3, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 4, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 5, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 6, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 7, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 8, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 9, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 10, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 11, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 12, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 13, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 14, weekId: 1, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 }
+    { id: 0, categoryId: 1, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 2, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 3, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 4, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 5, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 6, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 7, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 8, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 9, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 10, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 11, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 12, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 13, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
+    { id: 0, categoryId: 14, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 }
   ];
 
   constructor(
@@ -39,17 +39,15 @@ export class QuarterEntryFormComponent implements OnInit {
   ngOnInit() { }
 
   submit() {
-    for (var entry of this.entries) {
-      this.weekEntryService.create(entry)
-        .subscribe(x => {
-          this.toastyService.success({
-            title: 'Success',
-            msg: 'Successfully added a Week Entry',
-            theme: 'bootstrap',
-            showClose: true,
-            timeout: 5000
-          })
+    this.weekEntryService.create(this.entries)
+      .subscribe(x => {
+        this.toastyService.success({
+          title: 'Success',
+          msg: 'Successfully entered your time for the quarter.',
+          theme: 'bootstrap',
+          timeout: 5000
         });
-    }
+      });
   }
 }
+

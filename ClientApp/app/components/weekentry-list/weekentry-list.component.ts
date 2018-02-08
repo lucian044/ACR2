@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekentry-list.component.css']
 })
 export class WeekEntryListComponent implements OnInit {
-  private readonly PAGE_SIZE = 4;
+  private readonly PAGE_SIZE = 14;
 
   queryResult: any = {};
   weeks: Week[];

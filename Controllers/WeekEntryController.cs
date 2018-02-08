@@ -23,7 +23,7 @@ namespace ACR2.Controllers
         private readonly IUnitOfWork uw;
 
         public WeekEntryController(
-            IMapper mapper, 
+            IMapper mapper,
             IWeekEntryRepository entryRepo,
             ICategoryRepository categoryRepo,
             IWeekRepository weekRepo,
@@ -44,35 +44,46 @@ namespace ACR2.Controllers
             var queryResult = await entryRepo.GetAllEntries(filter);
 
             return mapper.Map<QueryResult<WeekEntry>, QueryResultResource<WeekEntryResource>>(queryResult);
- 
+
         }
 
         [HttpPost("post")]
-        public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
+        public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource[] entryResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var category = await categoryRepo.GetCategoryById(entryResource.CategoryId);
-            var week = await weekRepo.GetWeekById(entryResource.WeekId);
-            if (category == null)
+                var result = new List<WeekEntryResource>();
+            for (var i = 1; i < 12; i++)
             {
-                ModelState.AddModelError("Category", "Invalid category.");
-                return BadRequest(ModelState);
+                foreach (var e in entryResource) {
+                    e.WeekId = i;
+                }
+                foreach (var e in entryResource)
+                {
+                    var category = await categoryRepo.GetCategoryById(e.CategoryId);
+
+                    var week = await weekRepo.GetWeekById(e.WeekId);
+                    if (category == null)
+                    {
+                        ModelState.AddModelError("Category", "Invalid category.");
+                        return BadRequest(ModelState);
+                    }
+                    if (week == null)
+                    {
+                        ModelState.AddModelError("Week", "Invalid week.");
+                        return BadRequest(ModelState);
+                    }
+
+                    var entry = mapper.Map<SaveWeekEntryResource, WeekEntry>(e);
+                    entry.LastUpdated = DateTime.Now;
+
+                    entryRepo.AddEntry(entry);
+                    await uw.CompleteAsync();
+
+                    var res = mapper.Map<WeekEntry, WeekEntryResource>(entry);
+                    result.Add(res);
+                }
             }
-            if (week == null)
-            {
-                ModelState.AddModelError("Week", "Invalid week.");
-                return BadRequest(ModelState);
-            }
-
-            var entry = mapper.Map<SaveWeekEntryResource, WeekEntry>(entryResource);
-            entry.LastUpdated = DateTime.Now;
-
-            entryRepo.AddEntry(entry);
-            await uw.CompleteAsync();
-
-            var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
 
             return Ok(result);
         }

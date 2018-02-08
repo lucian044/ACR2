@@ -19,8 +19,8 @@ export class WeekEntryService {
       .map(res => res.json());
   }
 
-  create(entry: SaveWeekEntry){
-    return this.http.post(this.weekEntryEndpoint + 'post', entry)
+  create(entries: SaveWeekEntry[]){
+    return this.http.post(this.weekEntryEndpoint + 'post', entries)
       .map(res => res.json());
   }
 
