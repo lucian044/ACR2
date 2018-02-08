@@ -2,6 +2,7 @@ import * as Raven from 'raven-js';
 import { ViewWeekEntryComponent } from './components/view-weekentry/view-weekentry';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { WeekEntryFormComponent } from './components/weekentry-form/weekentry-form.component';
+import { QuarterEntryFormComponent } from './components/quarterentry-form/quarterentry-form.component';
 import { WeekEntryListComponent } from './components/weekentry-list/weekentry-list.component';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,6 +29,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         FetchDataComponent,
         HomeComponent, 
         WeekEntryFormComponent,
+        QuarterEntryFormComponent,
         WeekEntryListComponent,
         PaginationComponent,
         ViewWeekEntryComponent,
@@ -39,7 +41,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         ToastyModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'weekentries', pathMatch: 'full' },
-            { path:'weekentries/new', component: WeekEntryFormComponent },
+            { path:'quarterentries/new', component: QuarterEntryFormComponent },
             { path:'weekentries/:id', component: ViewWeekEntryComponent },
             { path: 'weekentries/edit/:id', component: WeekEntryFormComponent },
             { path:'weekentries', component: WeekEntryListComponent },
