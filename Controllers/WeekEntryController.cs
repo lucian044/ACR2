@@ -48,17 +48,30 @@ namespace ACR2.Controllers
         }
 
         [HttpPost("post")]
-        public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource[] entryResource)
+        public async Task<IActionResult> CreateWeekEntry([FromBody] List<SaveWeekEntryResource> entryResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-                var result = new List<WeekEntryResource>();
+
+            var entries = new List<SaveWeekEntryResource>();
+            foreach (var e in entryResource)
+            {
+                var sum = e.Mon + e.Tue + e.Wed + e.Thurs + e.Fri;
+                if (sum != 0)
+                {
+                    entries.Add(e);
+                }
+            }
+
+            var result = new List<WeekEntryResource>();
+
             for (var i = 1; i < 12; i++)
             {
-                foreach (var e in entryResource) {
+                foreach (var e in entries)
+                {
                     e.WeekId = i;
                 }
-                foreach (var e in entryResource)
+                foreach (var e in entries)
                 {
                     var category = await categoryRepo.GetCategoryById(e.CategoryId);
 

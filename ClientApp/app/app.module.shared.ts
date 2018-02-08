@@ -41,6 +41,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         ToastyModule.forRoot(),
         RouterModule.forRoot([
             { path: '', redirectTo: 'weekentries', pathMatch: 'full' },
+            { path:'weekentries/new', component: WeekEntryFormComponent },
             { path:'quarterentries/new', component: QuarterEntryFormComponent },
             { path:'weekentries/:id', component: ViewWeekEntryComponent },
             { path: 'weekentries/edit/:id', component: WeekEntryFormComponent },
