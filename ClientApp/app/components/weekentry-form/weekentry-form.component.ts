@@ -15,22 +15,6 @@ import 'rxjs/add/Observable/forkJoin';
 export class WeekEntryFormComponent implements OnInit {
   categories: any = [];
   weeks: any = [];
-  entries: SaveWeekEntry[] = [
-    { id: 0, categoryId: 1, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 2, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 3, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 4, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 5, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 6, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 7, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 8, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 9, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 10, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 11, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 12, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 13, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 },
-    { id: 0, categoryId: 14, weekId: 0, mon: 0, tue: 0, wed: 0, thurs: 0, fri: 0 }
-  ];
   entry: SaveWeekEntry = {
     id: 0,
     categoryId: 0,
@@ -107,7 +91,7 @@ export class WeekEntryFormComponent implements OnInit {
             showClose: true,
             timeout: 5000
           })
-        }); 
+        });
     }
   }
 
