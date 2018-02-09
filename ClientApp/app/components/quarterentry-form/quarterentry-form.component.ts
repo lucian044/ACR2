@@ -39,7 +39,7 @@ export class QuarterEntryFormComponent implements OnInit {
   ngOnInit() { }
 
   submit() {
-    this.weekEntryService.create(this.entries)
+    this.weekEntryService.createQuarter(this.entries)
       .subscribe(x => {
         this.toastyService.success({
           title: 'Success',

@@ -82,8 +82,7 @@ export class WeekEntryFormComponent implements OnInit {
         });
     }
     else {
-      var entries: SaveWeekEntry[] = [this.entry];
-      this.weekEntryService.create(entries)
+      this.weekEntryService.createWeek(this.entry)
         .subscribe(x => {
           this.toastyService.success({
             title: 'Success',

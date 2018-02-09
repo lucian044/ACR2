@@ -47,8 +47,38 @@ namespace ACR2.Controllers
 
         }
 
-        [HttpPost("post")]
-        public async Task<IActionResult> CreateWeekEntry([FromBody] List<SaveWeekEntryResource> entryResource)
+        [HttpPost("new/week")]
+        public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var category = await categoryRepo.GetCategoryById(entryResource.CategoryId);
+            var week = await weekRepo.GetWeekById(entryResource.WeekId);
+            if (category == null)
+            {
+                ModelState.AddModelError("Category", "Invalid category.");
+                return BadRequest(ModelState);
+            }
+            if (week == null)
+            {
+                ModelState.AddModelError("Week", "Invalid week.");
+                return BadRequest(ModelState);
+            }
+
+            var entry = mapper.Map<SaveWeekEntryResource, WeekEntry>(entryResource);
+            entry.LastUpdated = DateTime.Now;
+
+            entryRepo.AddEntry(entry);
+            await uw.CompleteAsync();
+
+            var result = mapper.Map<WeekEntry, WeekEntryResource>(entry);
+
+            return Ok(result);
+        }
+
+        [HttpPost("new/quarter")]
+        public async Task<IActionResult> CreateQuarterEntry([FromBody] List<SaveWeekEntryResource> entryResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
