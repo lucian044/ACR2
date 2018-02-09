@@ -9,15 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekentry-list.component.css']
 })
 export class WeekEntryListComponent implements OnInit {
-  private readonly PAGE_SIZE = 14;
+  private readonly PAGE_SIZE = 10;
 
   queryResult: any = {};
-  weeks: Week[];
+  weeks: Week[] = [];
   query: any = {
     pageSize: this.PAGE_SIZE
   };
   columns = [
-    { title: 'Id' },
     { title: 'Quarter', key: 'quarter', isSortable: true },
     { title: 'Week', key: 'week', isSortable: true },
     { title: 'Category', key: 'category', isSortable: true },
