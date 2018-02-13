@@ -26,12 +26,12 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
-                    <a [routerLink]="['/weekentries']">
+                    <a [routerLink]="['/weekentries']" *ngIf="authService.isAuthenticated()">
                         <span class='glyphicon glyphicon-th-list'></span> Week Entries
                     </a>
                 </li> 
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/weekentries/new']">
+                    <a [routerLink]="['/weekentries/new']" *ngIf="authService.isAuthenticated()">
                         <span class='glyphicon glyphicon-plus'></span> New Week Entry
                     </a>
                 </li>

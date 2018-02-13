@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using ACR2.Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ACR2.Controllers;
 
 namespace ACR2
 {
@@ -40,6 +41,10 @@ namespace ACR2
             services.AddDbContext<ACRDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddMvc();
+
+            services.AddAuthorization(options => {
+                options.AddPolicy(Policies.RequireAdminRole, policy => policy.RequireClaim("https://acr.com/roles", "Admin"));
+            });
 
             services.AddAuthentication(options =>
             {

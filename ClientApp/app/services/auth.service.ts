@@ -20,7 +20,7 @@ export class AuthService {
         auth: {
             audience: 'https://api.acr.com',
             params: { scope: 'openid email profile' },
-            redirectUrl: 'http://localhost:5000/weekentries',
+            redirectUrl: 'http://localhost:5000',
             responseType: "token id_token",
         }
     }
@@ -31,7 +31,7 @@ export class AuthService {
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
-        var token = localStorage.getItem('access_token');
+        var token = localStorage.getItem('token');
         if (token) {
             var jwtHelper = new JwtHelper();
             var decodedToken = jwtHelper.decodeToken(token);
@@ -49,7 +49,7 @@ export class AuthService {
         this.lock.on("authenticated", (authResult: any) => {
 
             const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-            localStorage.setItem('access_token', authResult.accessToken);
+            localStorage.setItem('token', authResult.accessToken);
             localStorage.setItem('expires_at', expiresAt);
 
             var jwtHelper = new JwtHelper();
@@ -74,7 +74,7 @@ export class AuthService {
 
     public logout(): void {
         // Remove tokens and expiry time from localStorage
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
         localStorage.removeItem('profile');
@@ -82,7 +82,7 @@ export class AuthService {
         this.roles = [];
         // Go back to the home route
         this.lock.logout({
-            returnTo: 'http://localhost:5000/weekentries'
+            returnTo: 'http://localhost:5000/home'
         });
     }
 

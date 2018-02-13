@@ -1,3 +1,4 @@
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import * as Raven from 'raven-js';
 import { ViewWeekEntryComponent } from './components/view-weekentry/view-weekentry';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -19,6 +20,8 @@ import { CounterComponent } from './components/counter/counter.component';
 import { WeekEntryService } from './services/weekentry.service';
 import { AuthService } from './services/auth.service';
 import { AppErrorHandler } from './app.error-handler';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 
 Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').install();
 
@@ -40,13 +43,13 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         HttpModule,
         FormsModule,
         ToastyModule.forRoot(),
-        RouterModule.forRoot([
-            { path: '', redirectTo: 'weekentries', pathMatch: 'full' },
-            { path:'weekentries/new', component: WeekEntryFormComponent },
-            { path:'weekentries/:id', component: ViewWeekEntryComponent },
-            { path: 'weekentries/edit/:id', component: WeekEntryFormComponent },
-            { path:'weekentries', component: WeekEntryListComponent },
-            { path: 'admin', component: AdminComponent },
+        RouterModule.forRoot([ 
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path:'weekentries/new', component: WeekEntryFormComponent, canActivate: [ AuthGuard ] },
+            { path:'weekentries/:id', component: ViewWeekEntryComponent, canActivate: [ AuthGuard ] },
+            { path: 'weekentries/edit/:id', component: WeekEntryFormComponent, canActivate: [ AuthGuard ] },
+            { path:'weekentries', component: WeekEntryListComponent, canActivate: [ AuthGuard ] },
+            { path: 'admin', component: AdminComponent, canActivate: [ AdminAuthGuard ] },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
@@ -56,7 +59,10 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
         WeekEntryService,
-        AuthService
+        AuthService,
+        AuthGuard,
+        AdminAuthGuard,
+        AUTH_PROVIDERS
     ]
 })
 export class AppModuleShared {
