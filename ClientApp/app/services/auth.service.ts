@@ -3,25 +3,40 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock'
+import { JwtHelper } from 'angular2-jwt'
 
 
-@Injectable() 
+@Injectable()
 export class AuthService {
     options = {
         allowShowPassword: true,
+        additionalSignUpFields: [
+            {
+                name: "name",
+                placeholder: "Name"
+            }
+        ],
         autoclose: true,
         auth: {
             audience: 'https://api.acr.com',
-            params: { scope: 'openid email' },
+            params: { scope: 'openid email profile' },
             redirectUrl: 'http://localhost:5000/weekentries',
             responseType: "token id_token",
         }
     }
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
     profile: any;
+    private roles: string[] = [];
+    private userId: any;
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
+        var token = localStorage.getItem('access_token');
+        if (token) {
+            var jwtHelper = new JwtHelper();
+            var decodedToken = jwtHelper.decodeToken(token);
+            this.roles = decodedToken['https://acr.com/roles'];
+        }
         this.lock.on('unrecoverable_error', console.error.bind(console));
     }
 
@@ -32,15 +47,27 @@ export class AuthService {
     public handleAuthentication(): void {
         // Listening for the authenticated event
         this.lock.on("authenticated", (authResult: any) => {
+
+            const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+            localStorage.setItem('access_token', authResult.accessToken);
+            localStorage.setItem('expires_at', expiresAt);
+
+            var jwtHelper = new JwtHelper();
+            var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
+            this.roles = decodedToken['https://acr.com/roles'];
+
+            var jwtHelper2 = new JwtHelper();
+            var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
+            this.userId = decodedToken['https://acr.com/userid'];
+
             // Use the token in authResult to getUserInfo() and save it to localStorage
-            this.lock.getUserInfo(authResult.accessToken, function (error: any, profile: any) {
+            this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
                 if (error) {
                     throw error;
                 }
-                const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-                localStorage.setItem('access_token', authResult.accessToken);
-                localStorage.setItem('expires_at', expiresAt);
+
                 localStorage.setItem('profile', JSON.stringify(profile));
+                this.profile = profile;
             });
         });
     }
@@ -52,6 +79,7 @@ export class AuthService {
         localStorage.removeItem('expires_at');
         localStorage.removeItem('profile');
         this.profile = null;
+        this.roles = [];
         // Go back to the home route
         this.lock.logout({
             returnTo: 'http://localhost:5000/weekentries'
@@ -62,4 +90,12 @@ export class AuthService {
         return new Date().getTime() < Number(localStorage.getItem('expires_at'));
     }
 
- }
+    public isInRole(name: any) {
+        return this.roles.indexOf(name) > -1;
+    }
+
+    public getUserId() {
+        return this.userId;
+    }
+
+}

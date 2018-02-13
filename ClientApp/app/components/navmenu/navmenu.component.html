@@ -35,16 +35,11 @@
                         <span class='glyphicon glyphicon-plus'></span> New Week Entry
                     </a>
                 </li>
-                <!-- <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
+                <li [routerLinkActive]="['link-active']" *ngIf="authService.isInRole('Admin')">
+                    <a [routerLink]="['/admin']">
+                        <span class='glyphicon glyphicon-education'></span> Admin
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                    </a>
-                </li> -->
             </ul>
         </div>
     </div>

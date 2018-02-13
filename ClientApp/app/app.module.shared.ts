@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './components/app/app.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
@@ -32,6 +33,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         WeekEntryListComponent,
         PaginationComponent,
         ViewWeekEntryComponent,
+        AdminComponent
     ],
     imports: [
         CommonModule,
@@ -44,6 +46,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
             { path:'weekentries/:id', component: ViewWeekEntryComponent },
             { path: 'weekentries/edit/:id', component: WeekEntryFormComponent },
             { path:'weekentries', component: WeekEntryListComponent },
+            { path: 'admin', component: AdminComponent },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
