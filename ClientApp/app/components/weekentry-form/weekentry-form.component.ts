@@ -84,7 +84,7 @@ export class WeekEntryFormComponent implements OnInit {
         });
     }
     else {
-      this.weekEntryService.create(this.entry)
+      this.weekEntryService.createWeek(this.entry)
         .subscribe(x => {
           this.toastyService.success({
             title: 'Success',

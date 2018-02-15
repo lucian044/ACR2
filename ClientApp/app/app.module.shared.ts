@@ -3,6 +3,7 @@ import * as Raven from 'raven-js';
 import { ViewWeekEntryComponent } from './components/view-weekentry/view-weekentry';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { WeekEntryFormComponent } from './components/weekentry-form/weekentry-form.component';
+import { QuarterEntryFormComponent } from './components/quarterentry-form/quarterentry-form.component';
 import { WeekEntryListComponent } from './components/weekentry-list/weekentry-list.component';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -33,6 +34,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         FetchDataComponent,
         HomeComponent, 
         WeekEntryFormComponent,
+        QuarterEntryFormComponent,
         WeekEntryListComponent,
         PaginationComponent,
         ViewWeekEntryComponent,
@@ -46,6 +48,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         RouterModule.forRoot([ 
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path:'weekentries/new', component: WeekEntryFormComponent, canActivate: [ AuthGuard ] },
+            { path:'quarterentries/new', component: QuarterEntryFormComponent, canActivate: [ AuthGuard ] },
             { path:'weekentries/:id', component: ViewWeekEntryComponent, canActivate: [ AuthGuard ] },
             { path: 'weekentries/edit/:id', component: WeekEntryFormComponent, canActivate: [ AuthGuard ] },
             { path:'weekentries', component: WeekEntryListComponent, canActivate: [ AuthGuard ] },

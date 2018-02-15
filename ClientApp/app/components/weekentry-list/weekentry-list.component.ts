@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekentry-list.component.css']
 })
 export class WeekEntryListComponent implements OnInit {
-  private readonly PAGE_SIZE = 4;
+  private readonly PAGE_SIZE = 10;
 
   queryResult: any = {};
   weeks: Week[] = [];
@@ -18,7 +18,6 @@ export class WeekEntryListComponent implements OnInit {
     pageSize: this.PAGE_SIZE
   };
   columns = [
-    { title: 'Id' },
     { title: 'Quarter', key: 'quarter', isSortable: true },
     { title: 'Week', key: 'week', isSortable: true },
     { title: 'Category', key: 'category', isSortable: true },

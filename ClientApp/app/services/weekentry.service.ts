@@ -16,12 +16,17 @@ export class WeekEntryService {
   }
 
   getWeeks(){
-    return this.http.get('api/weeks')
+    return this.http.get('api/weeks') 
       .map(res => res.json());
   }
 
-  create(entry: SaveWeekEntry){
-    return this.authHttp.post(this.weekEntryEndpoint + 'post', entry)
+  createWeek(entries: SaveWeekEntry){
+    return this.http.post(this.weekEntryEndpoint + 'new/week', entries)
+      .map(res => res.json());
+  }
+
+  createQuarter(entries: SaveWeekEntry[]){
+    return this.http.post(this.weekEntryEndpoint + 'new/quarter', entries)
       .map(res => res.json());
   }
 

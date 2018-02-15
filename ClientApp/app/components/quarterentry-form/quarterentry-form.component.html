@@ -1,0 +1,533 @@
+<h1>Time for the Quarter</h1>
+<h3>Year: 2017  Quarter: 1</h3>
+
+<h2>Categories</h2>
+<form #f="ngForm" (ngSubmit)="submit()">
+  <div id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="container">
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingOne">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"style="color: #4189C7" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                1. Governance, Leadership, and Strategic Planning
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon1" type="text" class="form-control" [(ngModel)]="entries[0].mon" name="mon1" required #mon1="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue1" type="text" class="form-control" [(ngModel)]="entries[0].tue" name="tue1" required #tue1="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed1" type="text" class="form-control" [(ngModel)]="entries[0].wed" name="wed1" required #wed1="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs1" type="text" class="form-control" [(ngModel)]="entries[0].thurs" name="thurs1" required #thurs1="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri1" type="text" class="form-control" [(ngModel)]="entries[0].fri" name="fri1" required #fri1="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingTwo">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                2. Student and Other Stakeholder Focus
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon2" type="text" class="form-control" [(ngModel)]="entries[1].mon" name="mon2" required #mon2="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue2" type="text" class="form-control" [(ngModel)]="entries[1].tue" name="tue2" required #tue2="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed2" type="text" class="form-control" [(ngModel)]="entries[1].wed" name="wed2" required #wed2="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs2" type="text" class="form-control" [(ngModel)]="entries[1].thurs" name="thurs2" required #thurs2="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri2" type="text" class="form-control" [(ngModel)]="entries[1].fri" name="fri2" required #fri2="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingThree">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                3. Faculty and Staff Focus
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon3" type="text" class="form-control" [(ngModel)]="entries[2].mon" name="mon3" required #mon3="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue3" type="text" class="form-control" [(ngModel)]="entries[2].tue" name="tue3" required #tue3="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed3" type="text" class="form-control" [(ngModel)]="entries[2].wed" name="wed3" required #wed3="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs3" type="text" class="form-control" [(ngModel)]="entries[2].thurs" name="thurs3" required #thurs3="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri3" type="text" class="form-control" [(ngModel)]="entries[2].fri" name="fri3" required #fri3="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingFour">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                4. Educational Programs and Support
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon4" type="text" class="form-control" [(ngModel)]="entries[3].mon" name="mon4" required #mon4="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue4" type="text" class="form-control" [(ngModel)]="entries[3].tue" name="tue4" required #tue4="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed4" type="text" class="form-control" [(ngModel)]="entries[3].wed" name="wed4" required #wed4="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs4" type="text" class="form-control" [(ngModel)]="entries[3].thurs" name="thurs4" required #thurs4="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri4" type="text" class="form-control" [(ngModel)]="entries[3].fri" name="fri4" required #fri4="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingFive">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                5. Data Driven Improvement
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon5" type="text" class="form-control" [(ngModel)]="entries[4].mon" name="mon5" required #mon5="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue5" type="text" class="form-control" [(ngModel)]="entries[4].tue" name="tue5" required #tue5="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed5" type="text" class="form-control" [(ngModel)]="entries[4].wed" name="wed5" required #wed5="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs5" type="text" class="form-control" [(ngModel)]="entries[4].thurs" name="thurs5" required #thurs5="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri5" type="text" class="form-control" [(ngModel)]="entries[4].fri" name="fri5" required #fri5="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingSix">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                6. Chartered Nonpublic Schools
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon6" type="text" class="form-control" [(ngModel)]="entries[5].mon" name="mon6" required #mon6="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue6" type="text" class="form-control" [(ngModel)]="entries[5].tue" name="tue6" required #tue6="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed6" type="text" class="form-control" [(ngModel)]="entries[5].wed" name="wed6" required #wed6="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs6" type="text" class="form-control" [(ngModel)]="entries[5].thurs" name="thurs6" required #thurs6="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri6" type="text" class="form-control" [(ngModel)]="entries[5].fri" name="fri6" required #fri6="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingSeven">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                7. Teacher Residency
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon7" type="text" class="form-control" [(ngModel)]="entries[6].mon" name="mon7" required #mon7="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue7" type="text" class="form-control" [(ngModel)]="entries[6].tue" name="tue7" required #tue7="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed7" type="text" class="form-control" [(ngModel)]="entries[6].wed" name="wed7" required #wed7="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs7" type="text" class="form-control" [(ngModel)]="entries[6].thurs" name="thurs7" required #thurs7="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri7" type="text" class="form-control" [(ngModel)]="entries[6].fri" name="fri7" required #fri7="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingEight">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                8. Professional or Associate License Renewal
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon8" type="text" class="form-control" [(ngModel)]="entries[7].mon" name="mon8" required #mon8="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue8" type="text" class="form-control" [(ngModel)]="entries[7].tue" name="tue8" required #tue8="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed8" type="text" class="form-control" [(ngModel)]="entries[7].wed" name="wed8" required #wed8="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs8" type="text" class="form-control" [(ngModel)]="entries[7].thurs" name="thurs8" required #thurs8="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri8" type="text" class="form-control" [(ngModel)]="entries[7].fri" name="fri8" required #fri8="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingNine">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                9. Transportation of Pupils
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon9" type="text" class="form-control" [(ngModel)]="entries[8].mon" name="mon9" required #mon9="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue9" type="text" class="form-control" [(ngModel)]="entries[8].tue" name="tue9" required #tue9="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed9" type="text" class="form-control" [(ngModel)]="entries[8].wed" name="wed9" required #wed9="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs9" type="text" class="form-control" [(ngModel)]="entries[8].thurs" name="thurs9" required #thurs9="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri9" type="text" class="form-control" [(ngModel)]="entries[8].fri" name="fri9" required #fri9="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingTen">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                10. Federally Funded Education Programs
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon10" type="text" class="form-control" [(ngModel)]="entries[9].mon" name="mon10" required #mon10="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue10" type="text" class="form-control" [(ngModel)]="entries[9].tue" name="tue10" required #tue10="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed10" type="text" class="form-control" [(ngModel)]="entries[9].wed" name="wed10" required #wed10="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs10" type="text" class="form-control" [(ngModel)]="entries[9].thurs" name="thurs10" required #thurs10="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri10" type="text" class="form-control" [(ngModel)]="entries[9].fri" name="fri10" required #fri10="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingEleven">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                11. Unemployment and Workers Compensation
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon11" type="text" class="form-control" [(ngModel)]="entries[10].mon" name="mon11" required #mon11="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue11" type="text" class="form-control" [(ngModel)]="entries[10].tue" name="tue11" required #tue11="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed11" type="text" class="form-control" [(ngModel)]="entries[10].wed" name="wed11" required #wed11="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs11" type="text" class="form-control" [(ngModel)]="entries[10].thurs" name="thurs11" required #thurs11="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri11" type="text" class="form-control" [(ngModel)]="entries[10].fri" name="fri11" required #fri11="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingTwelve">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                12. Pupil Appraisal
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon12" type="text" class="form-control" [(ngModel)]="entries[11].mon" name="mon12" required #mon12="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue12" type="text" class="form-control" [(ngModel)]="entries[11].tue" name="tue12" required #tue12="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed12" type="text" class="form-control" [(ngModel)]="entries[11].wed" name="wed12" required #wed12="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs12" type="text" class="form-control" [(ngModel)]="entries[11].thurs" name="thurs12" required #thurs12="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri12" type="text" class="form-control" [(ngModel)]="entries[11].fri" name="fri12" required #fri12="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingThirteen">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                13. Health and Health Testing
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseThirteen" class="collapse" role="tabpanel" aria-labelledby="headingThirteen">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon13" type="text" class="form-control" [(ngModel)]="entries[12].mon" name="mon13" required #mon13="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue13" type="text" class="form-control" [(ngModel)]="entries[12].tue" name="tue13" required #tue13="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed13" type="text" class="form-control" [(ngModel)]="entries[12].wed" name="wed13" required #wed13="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs13" type="text" class="form-control" [(ngModel)]="entries[12].thurs" name="thurs13" required #thurs13="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri13" type="text" class="form-control" [(ngModel)]="entries[12].fri" name="fri13" required #fri13="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header" role="tab" id="headingFourteen">
+            <h4 class="mb-0">
+              <a style="color: #4189C7"data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+                14. Other
+              </a>
+            </h4>
+          </div>
+
+          <div id="collapseFourteen" class="collapse" role="tabpanel" aria-labelledby="headingFourteen">
+            <div class="card-block">
+              <div class="col-sm-1">
+                <p>Monday</p>
+                <input id="mon14" type="text" class="form-control" [(ngModel)]="entries[13].mon" name="mon14" required #mon14="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Tuesday</p>
+                <input id="tue14" type="text" class="form-control" [(ngModel)]="entries[13].tue" name="tue14" required #tue14="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Wednesday</p>
+                <input id="wed14" type="text" class="form-control" [(ngModel)]="entries[13].wed" name="wed14" required #wed14="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Thursday</p>
+                <input id="thurs14" type="text" class="form-control" [(ngModel)]="entries[13].thurs" name="thurs14" required #thurs14="ngModel">
+              </div>
+              <div class="col-sm-1">
+                <p>Friday</p>
+                <input id="fri14" type="text" class="form-control" [(ngModel)]="entries[13].fri" name="fri14" required #fri14="ngModel">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-sm-2">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
