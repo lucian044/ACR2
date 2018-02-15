@@ -12,7 +12,7 @@ export interface Week {
     entries: Array<any>;
 }
 
-export interface WeekEntry {
+export interface WeekEntry { 
     id: number;
     category: Category;
     week: Week;
