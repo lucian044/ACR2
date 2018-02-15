@@ -21,17 +21,17 @@ export class WeekEntryService {
   }
 
   createWeek(entries: SaveWeekEntry){
-    return this.http.post(this.weekEntryEndpoint + 'new/week', entries)
+    return this.authHttp.post(this.weekEntryEndpoint + 'new/week', entries)
       .map(res => res.json());
   }
 
   createQuarter(entries: SaveWeekEntry[]){
-    return this.http.post(this.weekEntryEndpoint + 'new/quarter', entries)
+    return this.authHttp.post(this.weekEntryEndpoint + 'new/quarter', entries)
       .map(res => res.json());
   }
 
   getWeekEntry(id: any){
-    return this.http.get(this.weekEntryEndpoint + id)
+    return this.authHttp.get(this.weekEntryEndpoint + id)
       .map(res => res.json());
   }
 

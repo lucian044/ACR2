@@ -80,6 +80,7 @@ namespace ACR2.Controllers
         }
 
         [HttpPost("new/quarter")]
+        [Authorize]
         public async Task<IActionResult> CreateQuarterEntry([FromBody] List<SaveWeekEntryResource> entryResource)
         {
             if (!ModelState.IsValid)

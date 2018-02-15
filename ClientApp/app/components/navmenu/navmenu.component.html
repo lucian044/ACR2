@@ -31,12 +31,12 @@
                     </a>
                 </li> 
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/weekentries/new']">
+                    <a [routerLink]="['/weekentries/new']" *ngIf="authService.isAuthenticated()">
                         <span class='glyphicon glyphicon-plus'></span> Enter Individual Week
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/quarterentries/new']">
+                    <a [routerLink]="['/quarterentries/new']" *ngIf="authService.isAuthenticated()">
                         <span class='glyphicon glyphicon-plus'></span> Enter Quarter
                     </a>
                 </li>
