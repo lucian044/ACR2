@@ -13,5 +13,6 @@ namespace ACR2.Core.Models.Resources
         public int Thurs { get; set; }
         public int Fri { get; set; }
         public int WeekId { get; set; }
+        public string Auth0Id { get; set; }
     }
 }

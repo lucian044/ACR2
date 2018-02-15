@@ -11,6 +11,7 @@ namespace ACR2.Models.Resources
         public int Wed { get; set; }
         public int Thurs { get; set; }
         public int Fri { get; set; }
+        public string Auth0Id { get; set; }
         public WeekResource Week { get; set; }
         public DateTime LastUpdated { get; set; }
     }

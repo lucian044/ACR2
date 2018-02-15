@@ -25,6 +25,7 @@ namespace ACR2.Models
         [Required]
         public int WeekId { get; set; }
         public Week Week { get; set; }
+        public string Auth0Id { get; set; }
         [Required]
         public DateTime LastUpdated { get; set; }
         public ICollection<Photo> Photos { get; set; }
