@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import * as _ from 'underscore';
 import { WeekEntry, SaveWeekEntry } from './../../models/weekentry';
 import { WeekEntryService } from './../../services/weekentry.service';
@@ -27,6 +28,7 @@ export class WeekEntryFormComponent implements OnInit {
   };
 
   constructor(
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private weekEntryService: WeekEntryService,
@@ -82,7 +84,7 @@ export class WeekEntryFormComponent implements OnInit {
         });
     }
     else {
-      this.weekEntryService.create(this.entry)
+      this.weekEntryService.createWeek(this.entry)
         .subscribe(x => {
           this.toastyService.success({
             title: 'Success',

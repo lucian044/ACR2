@@ -17,26 +17,34 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a (click)="authService.login()" *ngIf="!authService.isAuthenticated()">
+                        <span class='glyphicon glyphicon-user'></span> Login
+                    </a>
+                    <a (click)="authService.logout()" *ngIf="authService.isAuthenticated()">
+                        <span class='glyphicon glyphicon-user'></span> Logout
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact: true}">
-                    <a [routerLink]="['/weekentries']">
+                    <a [routerLink]="['/weekentries']" *ngIf="authService.isAuthenticated()">
                         <span class='glyphicon glyphicon-th-list'></span> Week Entries
                     </a>
-                </li>
+                </li> 
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/weekentries/new']">
-                        <span class='glyphicon glyphicon-plus'></span> New Week Entry
-                    </a>
-                </li>
-                <!-- <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
+                    <a [routerLink]="['/weekentries/new']" *ngIf="authService.isAuthenticated()">
+                        <span class='glyphicon glyphicon-plus'></span> Enter Individual Week
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                    <a [routerLink]="['/quarterentries/new']" *ngIf="authService.isAuthenticated()">
+                        <span class='glyphicon glyphicon-plus'></span> Enter Quarter
                     </a>
-                </li> -->
+                </li>
+                <li [routerLinkActive]="['link-active']" *ngIf="authService.isInRole('Admin')">
+                    <a [routerLink]="['/admin']">
+                        <span class='glyphicon glyphicon-education'></span> Admin
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

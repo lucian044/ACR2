@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { PaginationComponent } from './../shared/pagination.component';
 import { WeekEntry, Week } from './../../models/weekentry';
 import { WeekEntryService } from './../../services/weekentry.service';
@@ -9,15 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weekentry-list.component.css']
 })
 export class WeekEntryListComponent implements OnInit {
-  private readonly PAGE_SIZE = 4;
+  private readonly PAGE_SIZE = 10;
 
   queryResult: any = {};
-  weeks: Week[];
+  weeks: Week[] = [];
   query: any = {
     pageSize: this.PAGE_SIZE
   };
   columns = [
-    { title: 'Id' },
     { title: 'Quarter', key: 'quarter', isSortable: true },
     { title: 'Week', key: 'week', isSortable: true },
     { title: 'Category', key: 'category', isSortable: true },
@@ -29,7 +29,8 @@ export class WeekEntryListComponent implements OnInit {
     {}
   ];
 
-  constructor(private weekEntryService: WeekEntryService) { }
+  constructor(private weekEntryService: WeekEntryService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.weekEntryService.getWeeks()

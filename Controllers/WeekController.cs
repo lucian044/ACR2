@@ -4,6 +4,7 @@ using ACR2.Models;
 using ACR2.Models.Resources;
 using ACR2.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

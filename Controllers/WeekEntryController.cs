@@ -8,6 +8,7 @@ using ACR2.Models;
 using ACR2.Models.Resources;
 using ACR2.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@ namespace ACR2.Controllers
         private readonly IUnitOfWork uw;
 
         public WeekEntryController(
-            IMapper mapper, 
+            IMapper mapper,
             IWeekEntryRepository entryRepo,
             ICategoryRepository categoryRepo,
             IWeekRepository weekRepo,
@@ -47,7 +48,8 @@ namespace ACR2.Controllers
 
         }
 
-        [HttpPost("post")]
+        [HttpPost("new/week")]
+        [Authorize]
         public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
@@ -77,7 +79,63 @@ namespace ACR2.Controllers
             return Ok(result);
         }
 
+        [HttpPost("new/quarter")]
+        [Authorize]
+        public async Task<IActionResult> CreateQuarterEntry([FromBody] List<SaveWeekEntryResource> entryResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var entries = new List<SaveWeekEntryResource>();
+            foreach (var e in entryResource)
+            {
+                var sum = e.Mon + e.Tue + e.Wed + e.Thurs + e.Fri;
+                if (sum != 0)
+                {
+                    entries.Add(e);
+                }
+            }
+
+            var result = new List<WeekEntryResource>();
+
+            for (var i = 1; i < 12; i++)
+            {
+                foreach (var e in entries)
+                {
+                    e.WeekId = i;
+                }
+                foreach (var e in entries)
+                {
+                    var category = await categoryRepo.GetCategoryById(e.CategoryId);
+
+                    var week = await weekRepo.GetWeekById(e.WeekId);
+                    if (category == null)
+                    {
+                        ModelState.AddModelError("Category", "Invalid category.");
+                        return BadRequest(ModelState);
+                    }
+                    if (week == null)
+                    {
+                        ModelState.AddModelError("Week", "Invalid week.");
+                        return BadRequest(ModelState);
+                    }
+
+                    var entry = mapper.Map<SaveWeekEntryResource, WeekEntry>(e);
+                    entry.LastUpdated = DateTime.Now;
+
+                    entryRepo.AddEntry(entry);
+                    await uw.CompleteAsync();
+
+                    var res = mapper.Map<WeekEntry, WeekEntryResource>(entry);
+                    result.Add(res);
+                }
+            }
+
+            return Ok(result);
+        }
+
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateWeekEntry(int id, [FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
@@ -102,6 +160,7 @@ namespace ACR2.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteWeekEntry(int id)
         {
             var entry = await entryRepo.GetEntryById(id, loadFull: false);
