@@ -8,6 +8,7 @@ using ACR2.Models;
 using ACR2.Models.Resources;
 using ACR2.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,7 @@ namespace ACR2.Controllers
         }
 
         [HttpPost("new/week")]
+        [Authorize]
         public async Task<IActionResult> CreateWeekEntry([FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
@@ -132,6 +134,7 @@ namespace ACR2.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateWeekEntry(int id, [FromBody] SaveWeekEntryResource entryResource)
         {
             if (!ModelState.IsValid)
@@ -156,6 +159,7 @@ namespace ACR2.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteWeekEntry(int id)
         {
             var entry = await entryRepo.GetEntryById(id, loadFull: false);

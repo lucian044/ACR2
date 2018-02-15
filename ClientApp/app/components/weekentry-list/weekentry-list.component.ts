@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { PaginationComponent } from './../shared/pagination.component';
 import { WeekEntry, Week } from './../../models/weekentry';
 import { WeekEntryService } from './../../services/weekentry.service';
@@ -28,7 +29,8 @@ export class WeekEntryListComponent implements OnInit {
     {}
   ];
 
-  constructor(private weekEntryService: WeekEntryService) { }
+  constructor(private weekEntryService: WeekEntryService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.weekEntryService.getWeeks()

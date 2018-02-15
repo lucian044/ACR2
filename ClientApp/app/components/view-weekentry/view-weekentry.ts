@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ToastyService } from 'ng2-toasty';
 import { WeekEntryService } from './../../services/weekentry.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,9 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ViewWeekEntryComponent implements OnInit {
   entry: any;
-  entryId: number; 
+  entryId: any; 
 
   constructor(
+    private authService: AuthService,
     private route: ActivatedRoute, 
     private router: Router,
     private toasty: ToastyService,

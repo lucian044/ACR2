@@ -12,6 +12,7 @@ const treeShakableModules = [
     '@angular/platform-browser',
     '@angular/platform-browser-dynamic',
     '@angular/router',
+    'angular2-jwt',
     'zone.js',
 ];
 const nonTreeShakableModules = [
@@ -23,6 +24,8 @@ const nonTreeShakableModules = [
     'font-awesome/css/font-awesome.css',
     'ng2-toasty',
     'ng2-toasty/bundles/style-bootstrap.css',
+    'auth0-js',
+    'auth0-lock',
     'jquery',
     'raven-js',
     'underscore'
