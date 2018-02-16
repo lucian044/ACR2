@@ -27,7 +27,7 @@ export class AuthService {
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
     profile: any;
     private roles: string[] = [];
-    private userId: any;
+    private userId: string = "";
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
@@ -36,6 +36,7 @@ export class AuthService {
             var jwtHelper = new JwtHelper();
             var decodedToken = jwtHelper.decodeToken(token);
             this.roles = decodedToken['https://acr.com/roles'];
+            this.userId = decodedToken['https://acr.com/userid'];
         }
         this.lock.on('unrecoverable_error', console.error.bind(console));
     }

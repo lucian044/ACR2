@@ -24,7 +24,8 @@ export class WeekEntryFormComponent implements OnInit {
     tue: 0,
     wed: 0,
     thurs: 0,
-    fri: 0
+    fri: 0,
+    auth0Id: this.authService.getUserId()
   };
 
   constructor(
@@ -69,6 +70,7 @@ export class WeekEntryFormComponent implements OnInit {
     this.entry.wed = e.wed;
     this.entry.thurs = e.thurs;
     this.entry.fri = e.fri;
+    this.entry.auth0Id = this.authService.getUserId();
   }
 
   submit() {
