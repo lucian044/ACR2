@@ -46,7 +46,7 @@ namespace ACR2.Controllers
 
             return mapper.Map<QueryResult<WeekEntry>, QueryResultResource<WeekEntryResource>>(queryResult);
 
-        }
+        } 
 
         [HttpPost("new/week")]
         [Authorize]

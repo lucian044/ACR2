@@ -1,6 +1,6 @@
 namespace ACR2.Core.Models.Resources
 {
-    public class WeekEntryQueryResource
+    public class WeekEntryQueryResource 
     {
         public int? Quarter { get; set; }
         public int? Week { get; set; }
@@ -9,5 +9,6 @@ namespace ACR2.Core.Models.Resources
         public bool IsSortAscending { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
+        public string Auth0Id { get; set; }
     }
 }

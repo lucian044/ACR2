@@ -47,7 +47,7 @@ export class WeekEntryService {
 
   getWeekEntries(filter: any){
     return this.http.get(this.weekEntryEndpoint + '?' + this.toQueryString(filter))
-      .map(res => res.json());
+      .map(res => res.json()); 
   }
 
   toQueryString(obj: any){

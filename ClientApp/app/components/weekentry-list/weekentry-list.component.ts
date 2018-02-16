@@ -40,9 +40,10 @@ export class WeekEntryListComponent implements OnInit {
   }
 
   private populateEntries() {
+    this.query.auth0Id = this.authService.getUserId();
     this.weekEntryService.getWeekEntries(this.query)
       .subscribe(result => this.queryResult = result);
-  }
+  } 
 
   onFilterChange() {
     this.query.page = 1;
