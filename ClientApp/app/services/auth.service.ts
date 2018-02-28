@@ -92,7 +92,7 @@ export class AuthService {
                 auth0Id: this.userId
             }
 
-            if (!this.userService.getUser(this.user)) {
+            if (!this.userService.getUser(this.user.auth0Id)) {
                 this.userService.createUser(this.user);
             }
 
