@@ -1,9 +1,11 @@
+import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock'
 import { JwtHelper } from 'angular2-jwt'
+import { SaveUser } from '../models/user';
 
 
 @Injectable()
@@ -38,7 +40,16 @@ export class AuthService {
     }
     private email: string = "";
 
-    constructor(public router: Router) {
+    user: SaveUser = {
+        id: 0,
+        firstname: "",
+        lastname: "",
+        email: "",
+        schoolid: 0,
+        auth0Id: ""
+    };
+
+    constructor(public router: Router, public userService: UserService) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
         var token = localStorage.getItem('token');
         if (token) {
@@ -49,6 +60,7 @@ export class AuthService {
             this.user_metadata = decodedToken['https://acr.com/userdata'];
             this.email = decodedToken['https://acr.com/email'];
         }
+
         this.lock.on('unrecoverable_error', console.error.bind(console));
     }
 
@@ -70,6 +82,19 @@ export class AuthService {
             this.userId = decodedToken['https://acr.com/userid'];
             this.user_metadata = decodedToken['https://acr.com/userdata'];
             this.email = decodedToken['https://acr.com/email'];
+
+            this.user = {
+                id: 0,
+                firstname: this.user_metadata.firstname,
+                lastname: this.user_metadata.lastname,
+                email: this.email,
+                schoolid: 0,
+                auth0Id: this.userId
+            }
+
+            if (!this.userService.getUser(this.user)) {
+                this.userService.createUser(this.user);
+            }
 
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
