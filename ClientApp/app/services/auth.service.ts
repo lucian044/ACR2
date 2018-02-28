@@ -36,6 +36,7 @@ export class AuthService {
         firstname: "",
         lastname: ""
     }
+    private email: string = "";
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
@@ -46,6 +47,7 @@ export class AuthService {
             this.roles = decodedToken['https://acr.com/roles'];
             this.userId = decodedToken['https://acr.com/userid'];
             this.user_metadata = decodedToken['https://acr.com/userdata'];
+            this.email = decodedToken['https://acr.com/email'];
         }
         this.lock.on('unrecoverable_error', console.error.bind(console));
     }
@@ -67,7 +69,7 @@ export class AuthService {
             this.roles = decodedToken['https://acr.com/roles'];
             this.userId = decodedToken['https://acr.com/userid'];
             this.user_metadata = decodedToken['https://acr.com/userdata'];
-            console.log(this.user_metadata);
+            this.email = decodedToken['https://acr.com/email'];
 
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
@@ -113,6 +115,10 @@ export class AuthService {
 
     public getLastName() {
         return this.user_metadata.lastname;
+    }
+
+    public getEmail() {
+        return this.email;
     }
 
 }
