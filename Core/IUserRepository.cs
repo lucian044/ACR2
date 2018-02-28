@@ -7,9 +7,9 @@ namespace ACR2.Core
 {
     public interface IUserRepository
     {
-         Task<IEnumerable<User>> GetAllUsers();
+         Task<List<User>> GetAllUsers();
 
-         Task<User> GetUserById(int id);
+         Task<User> GetUserById(string id);
 
         void AddUser(User user);
 

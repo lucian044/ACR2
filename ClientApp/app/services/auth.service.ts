@@ -93,6 +93,7 @@ export class AuthService {
             }
 
             if (!this.userService.getUser(this.user.auth0Id)) {
+                console.log("creating...");
                 this.userService.createUser(this.user);
             }
 

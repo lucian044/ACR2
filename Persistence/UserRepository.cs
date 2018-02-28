@@ -16,7 +16,7 @@ namespace ACR2.Persistence
             this.context = context;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             return await context.User.ToListAsync();
         }
@@ -26,7 +26,7 @@ namespace ACR2.Persistence
             context.User.Add(user);
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(string id)
         {
             return await context.User.FindAsync(id);
         }

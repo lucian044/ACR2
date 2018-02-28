@@ -36,6 +36,8 @@ namespace ACR2.Mapping
                 .ForMember(we => we.Id, opt => opt.Ignore())
                 .ForMember(u => u.School, opt => opt.Ignore());
             CreateMap<SchoolResource, School>();
+            CreateMap<SaveUserResource, User>()
+                 .ForMember(we => we.Id, opt => opt.Ignore());
 
         }
     }
