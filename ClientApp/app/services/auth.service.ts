@@ -12,8 +12,12 @@ export class AuthService {
         allowShowPassword: true,
         additionalSignUpFields: [
             {
-                name: "name",
-                placeholder: "Name"
+                name: "firstname",
+                placeholder: "FirstName"
+            },
+            {
+                name: "lastname",
+                placeholder: "LastName"
             }
         ],
         autoclose: true,
@@ -28,6 +32,10 @@ export class AuthService {
     profile: any;
     private roles: string[] = [];
     private userId: string = "";
+    private user_metadata = {
+        firstname: "",
+        lastname: ""
+    }
 
     constructor(public router: Router) {
         this.profile = JSON.parse(String(localStorage.getItem('profile')));
@@ -37,6 +45,7 @@ export class AuthService {
             var decodedToken = jwtHelper.decodeToken(token);
             this.roles = decodedToken['https://acr.com/roles'];
             this.userId = decodedToken['https://acr.com/userid'];
+            this.user_metadata = decodedToken['https://acr.com/userdata'];
         }
         this.lock.on('unrecoverable_error', console.error.bind(console));
     }
@@ -56,10 +65,9 @@ export class AuthService {
             var jwtHelper = new JwtHelper();
             var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
             this.roles = decodedToken['https://acr.com/roles'];
-
-            var jwtHelper2 = new JwtHelper();
-            var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
             this.userId = decodedToken['https://acr.com/userid'];
+            this.user_metadata = decodedToken['https://acr.com/userdata'];
+            console.log(this.user_metadata);
 
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
@@ -97,6 +105,14 @@ export class AuthService {
 
     public getUserId() {
         return this.userId;
+    }
+
+    public getFirstName() {
+        return this.user_metadata.firstname;
+    }
+
+    public getLastName() {
+        return this.user_metadata.lastname;
     }
 
 }

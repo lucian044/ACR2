@@ -51,7 +51,7 @@ export class WeekEntryFormComponent implements OnInit {
 
     Observable.forkJoin(sources).subscribe(data => {
       this.categories = data[0];
-      this.weeks = data[1];
+      this.weeks = data[1]; 
       if (this.entry.id) {
         this.setWeekEntry(data[2]);
       }
