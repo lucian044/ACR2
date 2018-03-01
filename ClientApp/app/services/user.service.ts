@@ -10,8 +10,8 @@ export class UserService {
 
   constructor(private http: Http, private authHttp: AuthHttp) { }
 
-  createUser(entries: SaveUser){
-    return this.http.post(this.userEndPoint + 'new', entries)
+  createUser(user: SaveUser){       
+    return this.http.post(this.userEndPoint + 'new', user)
       .map(res => res.json());
   }
 

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using ACR2.Models;
 using ACR2.Core;
+using System.Linq;
 
 namespace ACR2.Persistence
 {
@@ -26,9 +27,9 @@ namespace ACR2.Persistence
             context.User.Add(user);
         }
 
-        public async Task<User> GetUserById(string id)
+        public IQueryable<User> GetUserById(string id)
         {
-            return await context.User.FindAsync(id);
+            return context.User.Where(u => u.Auth0Id == id);
         }
 
         public void RemoveUser(User user)

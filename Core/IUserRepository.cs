@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ACR2.Core.Models;
 using ACR2.Models;
@@ -9,7 +10,7 @@ namespace ACR2.Core
     {
          Task<List<User>> GetAllUsers();
 
-         Task<User> GetUserById(string id);
+         IQueryable<User> GetUserById(string id);
 
         void AddUser(User user);
 

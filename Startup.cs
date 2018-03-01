@@ -34,6 +34,8 @@ namespace ACR2
 
             services.AddScoped<IWeekRepository, WeekRepository>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper();

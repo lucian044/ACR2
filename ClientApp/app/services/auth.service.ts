@@ -1,3 +1,4 @@
+import { SaveUser } from './../models/user';
 import { UserService } from './user.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -5,7 +6,6 @@ import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock'
 import { JwtHelper } from 'angular2-jwt'
-import { SaveUser } from '../models/user';
 
 
 @Injectable()
@@ -32,7 +32,8 @@ export class AuthService {
     }
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
     profile: any;
-    private roles: string[] = [];
+    private roles: string[] = ["Teacher"];
+    private admin: string[] = [];
     private userId: string = "";
     private user_metadata = {
         firstname: "",
@@ -55,7 +56,17 @@ export class AuthService {
         if (token) {
             var jwtHelper = new JwtHelper();
             var decodedToken = jwtHelper.decodeToken(token);
-            this.roles = decodedToken['https://acr.com/roles'];
+            this.admin = decodedToken['https://acr.com/roles'];
+            var isAdmin: number;
+            if(this.admin.indexOf("Admin") == -1) {
+                isAdmin = 0;
+            }
+            else {
+                isAdmin = 1;
+            }
+            if (isAdmin){
+                this.roles.push("Admin");
+            }
             this.userId = decodedToken['https://acr.com/userid'];
             this.user_metadata = decodedToken['https://acr.com/userdata'];
             this.email = decodedToken['https://acr.com/email'];
@@ -78,24 +89,41 @@ export class AuthService {
 
             var jwtHelper = new JwtHelper();
             var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
-            this.roles = decodedToken['https://acr.com/roles'];
+            this.admin = decodedToken['https://acr.com/roles'];
+            var isAdmin: number;
+            if(this.admin.indexOf("Admin") == -1) {
+                isAdmin = 0;
+            }
+            else {
+                isAdmin = 1;
+            }
+            if (isAdmin){
+                this.roles.push("Admin");
+            }
             this.userId = decodedToken['https://acr.com/userid'];
             this.user_metadata = decodedToken['https://acr.com/userdata'];
             this.email = decodedToken['https://acr.com/email'];
 
-            this.user = {
-                id: 0,
-                firstname: this.user_metadata.firstname,
-                lastname: this.user_metadata.lastname,
-                email: this.email,
-                schoolid: 0,
-                auth0Id: this.userId
-            }
+            this.userService.getUser(this.userId).subscribe(val => {
+                if (!val.id) {
+                    var u: SaveUser = {
+                        id: 0,
+                        firstname: this.getFirstName(),
+                        lastname: this.getLastName(),
+                        email: this.getEmail(),
+                        schoolid: 1,
+                        auth0Id: this.getUserId()
+                    };
+                    console.log(u);
+                    this.userService.createUser(u).subscribe(x => console.log(x));
+                }
+            });
 
-            if (!this.userService.getUser(this.user.auth0Id)) {
-                console.log("creating...");
-                this.userService.createUser(this.user);
-            }
+
+            // if (!this.user.auth0Id) {
+            //     console.log("creating...");
+            //     this.userService.createUser(this.user);
+            // }
 
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
@@ -145,6 +173,15 @@ export class AuthService {
 
     public getEmail() {
         return this.email;
+    }
+
+    private setUser(u: any) {
+        this.user.id = u.id
+        this.user.firstname = u.firstName;
+        this.user.lastname = u.lastName;
+        this.user.email = u.email;
+        this.user.schoolid = u.schoolId;
+        this.user.auth0Id = u.auth0Id;
     }
 
 }

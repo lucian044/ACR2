@@ -60,7 +60,7 @@ namespace ACR2.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            var user = await userRepo.GetUserById(id);
+            var user = await userRepo.GetUserById(id).FirstOrDefaultAsync();
 
             if (user == null)
                 return NotFound();
@@ -74,10 +74,15 @@ namespace ACR2.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(string id)
         {
-            var user = await userRepo.GetUserById(id);
+            var user = await userRepo.GetUserById(id).FirstOrDefaultAsync();
 
             if (user == null)
-                return NotFound();
+            {
+                var u = new UserResource(){
+                    Id = 0
+                };
+                return Ok(u);
+            }
 
             var userResource = mapper.Map<User, UserResource>(user);
 
