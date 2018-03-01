@@ -32,7 +32,7 @@ export class AuthService {
     }
     lock = new Auth0Lock('7NRZ8gVGhQp4OP7nOOzFW6D6uL3m7iqn', 'acrproject.auth0.com', this.options);
     profile: any;
-    private roles: string[] = ["Teacher"];
+    private roles: string[] = ['Teacher'];
     private admin: string[] = [];
     private userId: string = "";
     private user_metadata = {
