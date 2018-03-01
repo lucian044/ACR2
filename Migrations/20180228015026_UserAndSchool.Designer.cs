@@ -11,7 +11,7 @@ using System;
 namespace ACR2.Migrations
 {
     [DbContext(typeof(ACRDbContext))]
-    [Migration("20180215231729_UserAndSchool")]
+    [Migration("20180228015026_UserAndSchool")]
     partial class UserAndSchool
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,24 +20,6 @@ namespace ACR2.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ACR2.Core.Models.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<int?>("WeekEntryId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WeekEntryId");
-
-                    b.ToTable("Photo");
-                });
 
             modelBuilder.Entity("ACR2.Models.Category", b =>
                 {
@@ -53,6 +35,45 @@ namespace ACR2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("ACR2.Models.School", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("School");
+                });
+
+            modelBuilder.Entity("ACR2.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Auth0Id");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("SchoolId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("ACR2.Models.Week", b =>
@@ -115,11 +136,12 @@ namespace ACR2.Migrations
                     b.ToTable("WeekNumber");
                 });
 
-            modelBuilder.Entity("ACR2.Core.Models.Photo", b =>
+            modelBuilder.Entity("ACR2.Models.User", b =>
                 {
-                    b.HasOne("ACR2.Models.WeekEntry")
-                        .WithMany("Photos")
-                        .HasForeignKey("WeekEntryId");
+                    b.HasOne("ACR2.Models.School", "School")
+                        .WithMany()
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ACR2.Models.WeekEntry", b =>

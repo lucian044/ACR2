@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import * as Raven from 'raven-js';
 import { ViewWeekEntryComponent } from './components/view-weekentry/view-weekentry';
@@ -63,6 +64,7 @@ Raven.config('https://4a82a6287bc049729f403390db1b1ec4@sentry.io/266502').instal
         { provide: ErrorHandler, useClass: AppErrorHandler },
         WeekEntryService,
         AuthService,
+        UserService,
         AuthGuard,
         AdminAuthGuard,
         AUTH_PROVIDERS

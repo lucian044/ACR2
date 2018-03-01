@@ -7,7 +7,7 @@ using AutoMapper;
 namespace ACR2.Mapping
 {
     public class MappingProfile : Profile
-    { 
+    {
         public MappingProfile()
         {
             // Domain to API Resource
@@ -19,6 +19,8 @@ namespace ACR2.Mapping
                 .ForMember(wer => wer.Category, opt => opt.MapFrom(we => we.Category))
                 .ForMember(wer => wer.Week, opt => opt.MapFrom(we => we.Week));
             CreateMap<WeekNumber, WeekNumberResource>();
+            CreateMap<User, UserResource>();
+            CreateMap<School, SchoolResource>();
 
             //API Resource to Domain
             CreateMap<WeekEntryQueryResource, WeekEntryQuery>();
@@ -30,6 +32,13 @@ namespace ACR2.Mapping
             CreateMap<WeekResource, Week>();
             CreateMap<SaveWeekEntryResource, WeekEntry>()
                  .ForMember(we => we.Id, opt => opt.Ignore());
+            CreateMap<UserResource, User>()
+                .ForMember(we => we.Id, opt => opt.Ignore())
+                .ForMember(u => u.School, opt => opt.Ignore());
+            CreateMap<SchoolResource, School>();
+            CreateMap<SaveUserResource, User>()
+                 .ForMember(we => we.Id, opt => opt.Ignore());
+
         }
     }
 }

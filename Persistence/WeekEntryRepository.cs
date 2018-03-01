@@ -34,6 +34,8 @@ namespace ACR2.Persistence
 
             if (queryObj.Category.HasValue)
                 query = query.Where(e => e.CategoryId == queryObj.Category.Value);
+            query = query.Where(e => e.Auth0Id == queryObj.Auth0Id);
+
 
             var columnsMap = new Dictionary<string, Expression<Func<WeekEntry, object>>>()
             {

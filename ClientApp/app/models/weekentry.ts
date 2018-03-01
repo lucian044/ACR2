@@ -21,6 +21,7 @@ export interface WeekEntry {
     wed: number;
     thurs: number;
     fri: number;
+    auth0Id: string;
     lastUpdated: string;
 }
 
@@ -33,4 +34,5 @@ export interface SaveWeekEntry {
     wed: number;
     thurs: number;
     fri: number;
+    auth0Id: string;
 }

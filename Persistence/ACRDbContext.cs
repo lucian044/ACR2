@@ -14,6 +14,7 @@ namespace ACR2.Persistence
         public DbSet<WeekEntry> WeekEntry { get; set; }
         public DbSet<Category> Category { get; set; } 
         public DbSet<WeekNumber> WeekNumber { get; set; }
-        public DbSet<Photo> Photo { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<School> School { get; set; }
     }
 }

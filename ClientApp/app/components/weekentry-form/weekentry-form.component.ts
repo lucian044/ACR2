@@ -24,7 +24,8 @@ export class WeekEntryFormComponent implements OnInit {
     tue: 0,
     wed: 0,
     thurs: 0,
-    fri: 0
+    fri: 0,
+    auth0Id: this.authService.getUserId()
   };
 
   constructor(
@@ -46,11 +47,11 @@ export class WeekEntryFormComponent implements OnInit {
     ];
 
     if (this.entry.id)
-      sources.push(this.weekEntryService.getWeekEntry(this.entry.id));
+      sources.push(this.weekEntryService.getWeekEntry(this.entry.id)); 
 
     Observable.forkJoin(sources).subscribe(data => {
       this.categories = data[0];
-      this.weeks = data[1];
+      this.weeks = data[1]; 
       if (this.entry.id) {
         this.setWeekEntry(data[2]);
       }
@@ -69,6 +70,7 @@ export class WeekEntryFormComponent implements OnInit {
     this.entry.wed = e.wed;
     this.entry.thurs = e.thurs;
     this.entry.fri = e.fri;
+    this.entry.auth0Id = this.authService.getUserId();
   }
 
   submit() {
