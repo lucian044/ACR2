@@ -114,16 +114,9 @@ export class AuthService {
                         schoolid: 1,
                         auth0Id: this.getUserId()
                     };
-                    console.log(u);
-                    this.userService.createUser(u).subscribe(x => console.log(x));
+                    this.userService.createUser(u).subscribe(x => x);
                 }
             });
-
-
-            // if (!this.user.auth0Id) {
-            //     console.log("creating...");
-            //     this.userService.createUser(this.user);
-            // }
 
             // Use the token in authResult to getUserInfo() and save it to localStorage
             this.lock.getUserInfo(authResult.accessToken, (error: any, profile: any) => {
