@@ -22,6 +22,9 @@ export class AuthService {
                 placeholder: "LastName"
             }
         ],
+        languageDictionary: {
+            title: "ACR Online"
+        },
         autoclose: true,
         auth: {
             audience: 'https://api.acr.com',
@@ -58,13 +61,13 @@ export class AuthService {
             var decodedToken = jwtHelper.decodeToken(token);
             this.admin = decodedToken['https://acr.com/roles'];
             var isAdmin: number;
-            if(this.admin.indexOf("Admin") == -1) {
+            if (this.admin.indexOf("Admin") == -1) {
                 isAdmin = 0;
             }
             else {
                 isAdmin = 1;
             }
-            if (isAdmin){
+            if (isAdmin) {
                 this.roles.push("Admin");
             }
             this.userId = decodedToken['https://acr.com/userid'];
@@ -91,13 +94,13 @@ export class AuthService {
             var decodedToken = jwtHelper.decodeToken(authResult.accessToken);
             this.admin = decodedToken['https://acr.com/roles'];
             var isAdmin: number;
-            if(this.admin.indexOf("Admin") == -1) {
+            if (this.admin.indexOf("Admin") == -1) {
                 isAdmin = 0;
             }
             else {
                 isAdmin = 1;
             }
-            if (isAdmin){
+            if (isAdmin) {
                 this.roles.push("Admin");
             }
             this.userId = decodedToken['https://acr.com/userid'];
